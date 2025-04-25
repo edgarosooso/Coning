@@ -1,0 +1,258 @@
+.button-container {
+	display: inline-block;
+	position: relative;
+}
+.button-container a {
+	position: absolute;
+	bottom: 4em;
+	right: 4em;
+	background-color: #8F0005;
+	border-radius: 1.5em;
+	color: white;
+	text-transform: uppercase;
+	padding: 1em 1.5em;
+}
+.button-container a:hover {
+	background-color: red;
+	cursor: pointer;
+	color: white;
+}
+.avatarJugador {
+	width: 5vw;
+	height: auto;
+}
+#cajaNivel {
+	background: none;
+	border: 0px;
+}
+.fadeOut {
+	animation: rotate3DAnimation 1.5s ease-out forwards;
+	transform-style: preserve-3d;
+}
+@keyframes rotate3DAnimation {
+	0%,25% {
+		transform: scale(1);
+	}
+	25%,50% {
+		transform: scale(1.2);
+	}
+	50%,55% {
+		transform: scale(0.6);
+	}
+	85%,88% {
+		transform: scale(0.5);
+	}
+	98%,100% {
+		transform: scale(0.2);
+		background-color: rgb(0, 0, 0);
+	}
+	70%,100% {
+		opacity: 0%;
+	}
+}
+#contenedor {
+	perspective: 1000px;
+}
+#imagen {
+	animation: show 1.5s ease-in-out forwards;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: -20px;
+	margin-left: -25px;
+	z-index: 99;
+
+}
+.fadein {
+	animation: show 0.8s ease-in-out forwards;
+}
+@keyframes show {
+	0% {
+		opacity: 0%;
+		transform: scale(0);
+	}
+	32% {
+		opacity: 0%;
+		transform: scale(0);
+	}
+	32%,90% {
+		opacity: 100%;
+		transform: scale(1) rotateZ(-10deg);
+	}
+	60% {
+		transform: rotateZ(10deg) scale(1);
+	}
+	100% {
+		opacity: 100%;
+		transform: scale(1) rotateZ(0deg);
+	}
+}
+#container {
+	text-align: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+#cuadro {
+	transition-duration: 0.5s;
+	width: auto;
+	height: 15vh;
+	border-radius: 10px;
+	padding-left: -22%;
+	margin-bottom: 2vh;
+	margin-top: 0%;
+}
+
+#cuadro:hover {
+	transform: scale(1.1);
+}
+#cuadro:active {
+	transform: scale(1);
+}
+#columnaCuadro {
+	margin-right: 0%;
+	padding-top: 0%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	padding-bottom: 0%;
+}
+#cuadro.sinTurno {
+	transform: rotatey(-180deg);
+}
+.cronometro {
+	margin-top: 0%;
+	font-family: cronometro;
+	font-size: 11pt;
+	color: rgb(255, 255, 255);
+}
+#juego {
+
+	padding-top: 0%;
+	padding-bottom: 5%;
+	background-image: url('../../assets/img/Tablero.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	// background-color: rgba(0, 0, 0, 0.9);
+	height: auto;
+	border-radius: 30px;
+	backdrop-filter: blur(17px);
+	border: #ffb300 1px solid;
+	
+}
+
+
+
+
+#espacioJuego {
+	padding-top: -10%;
+	margin-top: 0%;
+}
+#fondo {
+	background: rgb(42,169,211);
+	background: radial-gradient(circle, rgba(42,169,211,1) 0%, rgba(0,96,138,1) 100%);
+	height: 100vh;
+}
+.cajaPuntaje {
+	background-color: rgba(0, 0, 0, 0.9);
+	height: 15vh;
+	border-radius: 18px;
+	margin-top: 1vh;
+	backdrop-filter: blur(7px);
+	display: grid;
+	place-items: center;
+	padding-left: 7%;
+	padding-right: 10%;
+	border: #ffb300 1px solid;
+}
+#palabra {
+	background: rgb(4, 0, 64);
+	background: linear-gradient(353deg, rgb(2, 0, 35) 0%, rgba(0, 0, 0, 0.8) 100%, rgba(2, 0, 36, 0.8) 100%);
+	height: 15vh;
+	border-radius: 30px;
+	padding-left: 10%;
+	padding-right: 10%;
+	margin-top: 1vh;
+	backdrop-filter: blur(7px);
+	padding-top: 0%;
+	display: grid;
+	align-content: center;
+}
+.nombreJugador {
+	font-size: 17pt;
+	padding-bottom: 0%;
+	border: 0px;
+	margin-bottom: 0%;
+	padding-top: 0%;
+	margin-top: 2%;
+}
+.icoJugador {
+	font-size: 1.8vh;
+	margin-top: 1%;
+	margin-bottom:0%;
+}
+.puntaje {
+	color: #ffe400;
+	font-size: 25pt;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	margin-bottom: 0%;
+	margin-top: 0%;
+}
+#cajaAlerta {
+	position: fixed;
+	top: 40%;
+	width: 40vw;
+	left: 50%;
+	transition: opacity 0.2s, visibility 0s linear 0.5s;
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 10px;
+	border-radius: 5px;
+	width: 20%;
+	height: auto;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 2.5vh;
+	border-radius: 20px;
+}
+#manoSistema {
+	width: 10vh;
+	height: auto;
+}
+@keyframes turnoMostrar {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+}
+.loading-screen img {
+	height: 100%;
+	width: 100%;
+}
+.bloqueInfo{
+	padding-top: 0%;
+	padding-bottom: 0%;
+}

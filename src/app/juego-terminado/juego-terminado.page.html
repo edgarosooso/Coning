@@ -1,0 +1,70 @@
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<ion-content>
+
+  <div id="fondo">
+    <!-- <ion-row>
+      <ion-col id="logo" size-lg="1.5" offset-lg="10" size-xs="4" offset-xs="7.7" class="ion-text-end">
+        <img src="../../assets/img/ConingLogo.png">
+      </ion-col>
+    </ion-row> -->
+
+
+
+    <ion-row>
+      <ion-col id="contenedorResultado" size-lg="4" offset-lg="4" size-xs="11" offset-xs="0.5" size-sm="10"
+        offset-sm="1" size-md="8" offset-md="2">
+        <ion-row>
+          <ion-col #jugador1 class="card ion-text-center" size="6">
+
+
+            <img class="imgJugador" [src]="avatarJugador1">
+            <h3 class="puntos"> {{ puntosA }} </h3>
+            <h1 class="nombreJugador"> {{nombrejugador1}} </h1>
+            <p class="ico"><strong style="color: #269dff;">ICO </strong>{{ico1}} </p>
+
+          </ion-col>
+          <ion-col #jugador2 class="card ion-text-center" size="6">
+
+            <img class="imgJugador" [src]="avatarJugador2">
+            <h3 class="puntos"> {{ puntosB }} </h3>
+            <p class="nombreJugador"> {{nombreJugador2}} </p>
+            <p class="ico"><strong style="color: #269dff;">ICO </strong> {{ico2}} </p>
+
+
+          </ion-col>
+
+          <ion-col size="12" class="ion-text-center">
+            <div *ngIf="mostrarRevancha" (click)="revancha()" id="btnEntrar" class="ion-text-center">Revancha</div>
+          </ion-col>
+
+
+
+
+          <ion-col size="6" offset="3" class="ion-text-center">
+            <div (click)="regresar()" id="btnRegresar" class="ion-text-center">Seguiente</div>
+          </ion-col>
+
+
+
+
+
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</ion-content>

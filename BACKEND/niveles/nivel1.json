@@ -1,0 +1,82 @@
+[
+    {
+        "nombre": "Train",
+        "significado": "Tren"
+    },
+    {
+        "nombre": "Plane",
+        "significado": "Avión"
+    },
+    {
+        "nombre": "Boarding pass",
+        "significado": "Pase de abordaje"
+    },
+    {
+        "nombre": "Passport",
+        "significado": "Pasaporte"
+    },
+    {
+        "nombre": "Suitcase",
+        "significado": "Equipaje"
+    },
+    {
+        "nombre": "Station",
+        "significado": "Estación"
+    },
+    {
+        "nombre": "Airport",
+        "significado": "Aeropuerto"
+    },
+    {
+        "nombre": "Seat",
+        "significado": "Asiento"
+    },
+    {
+        "nombre": "Gate",
+        "significado": "Puerta"
+    },
+    {
+        "nombre": "Bridge",
+        "significado": "Puente"
+    },
+    {
+        "nombre": "Train",
+        "significado": "Tren"
+    },
+    {
+        "nombre": "Plane",
+        "significado": "Avión"
+    },
+    {
+        "nombre": "Boarding pass",
+        "significado": "Pase de abordaje"
+    },
+    {
+        "nombre": "Passport",
+        "significado": "Pasaporte"
+    },
+    {
+        "nombre": "Suitcase",
+        "significado": "Equipaje"
+    },
+    {
+        "nombre": "Station",
+        "significado": "Estación"
+    },
+    {
+        "nombre": "Airport",
+        "significado": "Aeropuerto"
+    },
+    {
+        "nombre": "Seat",
+        "significado": "Asiento"
+    },
+    {
+        "nombre": "Gate",
+        "significado": "Puerta"
+    },
+    {
+        "nombre": "Bridge",
+        "significado": "Puente"
+    }
+]

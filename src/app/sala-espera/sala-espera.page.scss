@@ -1,0 +1,134 @@
+#cajaJugadoresConectados{
+    padding-top: 4vh;
+  }
+  
+  #fondo {
+    background-color: black;
+    height: 100vh; 
+  }
+  
+  #Titulo{
+    font-size: 10pt;
+    color:  #ffb700;
+  }
+  
+  .card {
+    border: solid 2px #ffb700;
+    border-radius: 20px;
+    transition: all 0.2s ease-out;
+    opacity: 0.5    ;
+    z-index: 0;
+    margin-right: 0px;
+    margin-left: 0px;
+    
+  
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  
+  .card:active {
+    transform: scale(1);
+  }
+  
+  
+  #tu{
+    border: solid 2px #ffb700;
+    border-radius: 20px;
+    margin-top: 10vh;
+    opacity: 1;
+    animation: entradascale 0.5s ease-out;
+  }
+  
+  @keyframes entradascale{
+    0%{
+        opacity: 0;
+    }
+  
+    100%{
+        transform: scale(1);
+    }
+  }
+  
+  
+  #btnEntrar {
+    margin-top: 3vh;
+    margin-bottom: -7px;
+    border: 1px ridge #10b967;
+    border-radius: 5px;
+    height: 5vh;
+    display: grid;
+    place-content: center;
+    transition: all 0.3s ease-in-out;
+    font-size: 13pt;
+    // color: #00d9ff;
+    //  background-color: rgba(0, 0, 0, 0.5);
+    background-color: #040404;
+    color: #10b967;
+    font-family: 'subtitulos';
+  
+  }
+  
+  #btnEntrar:hover {
+    border: 0px;
+    border-radius: 10px;
+    transform: scale(1.1);
+    background-color: #050505;
+    color: #10b967;
+    cursor: pointer;
+    -webkit-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+  }
+  
+   
+  
+  #btnEntrar:active{
+    transform: scale(0.9);
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    color:  rgb(0, 76, 255);
+  }
+  
+  
+  .subtitulo{
+    font-family: 'subtitulos';
+    margin-top: -9vh;
+    text-shadow: 4px 4px 4px #000;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-left: 4px;
+  
+  
+  }
+  
+  .ICO{
+    font-family: 'subtitulos';
+    margin-top: -8vh;
+    color: #00ff77;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-left: 4px;
+  
+  
+  }
+  
+  #subtituloTu{
+    font-family: 'subtitulos';
+    font-size: 15pt;
+    
+  
+  
+  }
+  
+  #ICOTu{
+    font-family: 'subtitulos';
+    margin-top: -1vh;
+    font-size: 16pt;
+    color: #00ff77;
+  }
+  
+  #logo{
+    margin-top: 2vh;
+  }
+  

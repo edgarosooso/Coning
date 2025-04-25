@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">coning</string>
+    <string name="title_activity_main">coning</string>
+    <string name="package_name">com.dokasoft.coning</string>
+    <string name="custom_url_scheme">com.dokasoft.coning</string>
+</resources>

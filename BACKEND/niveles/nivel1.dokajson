@@ -1,0 +1,102 @@
+[
+	{
+		"nombre": "Chair",
+		"significado": "Silla",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Chair.png)"
+	},
+	{
+		"nombre": "Armchair",
+		"significado": "Sillón",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Armchair.png)"
+	},
+	{
+		"nombre": "Rocking chair",
+		"significado": "Mecedora",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Rocking chair.png)"
+	},
+	{
+		"nombre": "Stool",
+		"significado": "Taburete",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Stool.png)"
+	},
+	{
+		"nombre": "Shelves",
+		"significado": "Estantería",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Shelves.png)"
+	},
+	{
+		"nombre": "Bookcase",
+		"significado": "Biblioteca",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Bookcase.png)"
+	},
+	{
+		"nombre": "Couch",
+		"significado": "Sofá",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Couch.png)"
+	},
+	{
+		"nombre": "Sofa",
+		"significado": "Sofá",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Sofa.png)"
+	},
+	{
+		"nombre": "Cushion",
+		"significado": "Cojín",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Cushion.png)"
+	},
+	{
+		"nombre": "Coffee table",
+		"significado": "Mesita Baja",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Coffee table.png)"
+	},
+	{
+		"nombre": "Chair",
+		"significado": "Silla",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Chair.png)"
+	},
+	{
+		"nombre": "Armchair",
+		"significado": "Sillón",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Armchair.png)"
+	},
+	{
+		"nombre": "Rocking chair",
+		"significado": "Mecedora",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Rocking chair.png)"
+	},
+	{
+		"nombre": "Stool",
+		"significado": "Taburete",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Stool.png)"
+	},
+	{
+		"nombre": "Shelves",
+		"significado": "Estantería",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Shelves.png)"
+	},
+	{
+		"nombre": "Bookcase",
+		"significado": "Biblioteca",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Bookcase.png)"
+	},
+	{
+		"nombre": "Couch",
+		"significado": "Sofá",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Couch.png)"
+	},
+	{
+		"nombre": "Sofa",
+		"significado": "Sofá",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Sofa.png)"
+	},
+	{
+		"nombre": "Cushion",
+		"significado": "Cojín",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Cushion.png)"
+	},
+	{
+		"nombre": "Coffee table",
+		"significado": "Mesita Baja",
+		"imagen": "url(../../../assets/icons-audios/nivel1/icons/Coffee table.png)"
+	}  
+]

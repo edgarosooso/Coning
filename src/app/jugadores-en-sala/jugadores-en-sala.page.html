@@ -1,0 +1,17 @@
+<ion-content [fullscreen]="true">
+<h1> jugadores en sala </h1>
+  <ion-grid>
+    <ion-row *ngFor="let salas of juegosSalas">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> {{ salas.jugador1 }} </ion-card-title>
+          <ion-card-subtitle> {{ salas.jugador2 }} </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button (click)="solicitarEspectador(salas.id)"> Ver Jugar </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

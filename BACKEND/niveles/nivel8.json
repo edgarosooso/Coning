@@ -1,0 +1,43 @@
+[
+    {
+        "nombre": "Apple",
+        "significado": "Sacacorchos"
+    },
+    {
+        "nombre": "Apricot",
+        "significado": "Copa de Vino"
+    },
+    {
+        "nombre": "Avocado",
+        "significado": "Vino"
+    },
+    {
+        "nombre": "Banana",
+        "significado": "Cerveza"
+    },
+    {
+        "nombre": "Cranberry",
+        "significado": "Refrigerador"
+    },
+    {
+        "nombre": "Cucumber",
+        "significado": "Cubeta de hielo"
+    },
+    {
+        "nombre": "Mandarin",
+        "significado": "Botella"
+    },
+    {
+        "nombre": "Pear",
+        "significado": "Estufa"
+    },
+    {
+        "nombre": "Strawberry",
+        "significado": "Quemador"
+    },
+    {
+        "nombre": "watermelon",
+        "significado": "Horno"
+    },
+     
+]

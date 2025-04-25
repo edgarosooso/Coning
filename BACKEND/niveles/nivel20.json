@@ -1,0 +1,102 @@
+[
+    {
+        "nombre": "Hello My name is Maria I am from Spain I am 18 year old",
+        "significado": "Hola mi nombre es Maria Soy de españa tengo 18 años",
+        "sonido": 1
+    },
+    {
+        "nombre": "Hi I am Peter I am from a small town in California",
+        "significado": "Hola mi nombre es Peter. Soy de un pequeño pueblo de california",
+        "sonido": 2
+    },
+    {
+        "nombre": "Hey My name is Pedro I'm from Mexico What is your name",
+        "significado": "Hola mi nombre es Pedro Soy de Mexico Cómo te llamas?",
+        "sonido": 3
+    },
+    {
+        "nombre": "Hi there I'm Diana from Poland Where are you from",
+        "significado": "Hola soy Diana de Polonia De dónde eres?",
+        "sonido": 4
+    },
+    {
+        "nombre": "Hi I,m Jake What is your name I'm Florence Nice to meet you Florence",
+        "significado": "Hola soy Jake ¿Cómo te llamas? soy florencia Encantado de conocerte Florencia",
+        "sonido": 5
+    },
+    {
+        "nombre": "Hi my name's Alfredo Hi Alfredo I'm Celine I'm from france Are you French No I'm from Italian",
+        "significado": "Hola, mi nombre es Alfredo. Hola Alfredo, soy Celine. Soy de Francia. Es usted francés. No, soy italiano,",
+        "sonido": 6
+    },
+    {
+        "nombre": "Hi Steffie How are you Good thanks and you I'm doing great this is Emre Hi Emre nice to meet you Where are you from I'm from Turkey",
+        "significado": "Hola, Steffi, ¿cómo estás? ¿Bien gracias y usted? Estoy muy bien, soy Emre, hola, Emre, encantado de conocerte, ¿de dónde eres? Yo soy de Turquía",
+        "sonido": 7
+    },
+    {
+        "nombre": "the United States Poland Mexico Brazil Canada",
+        "significado": "Estados Unidos Polonia México, Brasil Canadá",
+        "sonido": 8
+    },
+    {
+        "nombre": "Italy France Spain Thailand England",
+        "significado": "Italia Francia España Tailandia Inglaterra",
+        "sonido": 9
+    },
+    {
+        "nombre": "Colombia Russia Turkey Australia China South Korea Germany Algeria Sudan",
+        "significado": "Colombia Rusia Turquía Australia China Corea del Sur Alemania Argelia Sudán",
+        "sonido": 10
+    },
+    {
+        "nombre": "Hello My name is Maria I am from Spain I am 18 year old",
+        "significado": "Hola mi nombre es Maria Soy de españa tengo 18 años",
+        "sonido": 1
+    },
+    {
+        "nombre": "Hi I am Peter I am from a small town in California",
+        "significado": "Hola mi nombre es Peter Soy de un pequeño pueblo de california",
+        "sonido": 2
+    },
+    {
+        "nombre": "Hey My name is Pedro I'm from Mexico What is your name",
+        "significado": "Hola mi nombre es Pedro Soy de Mexico Cómo te llamas?",
+        "sonido": 3
+    },
+    {
+        "nombre": "Hi there I'm Diana from Poland Where are you from",
+        "significado": "Hola, soy Diana de Polonia. De dónde eres?",
+        "sonido": 4
+    },
+    {
+        "nombre": "Hi I,m Jake What is your name I'm Florence Nice to meet you Florence",
+        "significado": "Hola, soy Jake. ¿Cómo te llamas?. soy florencia Encantado de conocerte Florencia",
+        "sonido": 5
+    },
+    {
+        "nombre": "Hi my name's Alfredo Hi Alfredo I'm Celine I'm from france Are you French No I'm from Italian",
+        "significado": "Hola, mi nombre es Alfredo. Hola Alfredo, soy Celine. Soy de Francia. Es usted francés. No, soy italiano,",
+        "sonido": 6
+    },
+    {
+        "nombre": "Hi Steffie How are you Good thanks and you I'm doing great this is Emre Hi Emre nice to meet you Where are you from I'm from Turkey",
+        "significado": "Hola, Steffi, ¿cómo estás? ¿Bien gracias y usted? Estoy muy bien, soy Emre, hola, Emre, encantado de conocerte, ¿de dónde eres? Yo soy de Turquía",
+        "sonido": 7
+    },
+    {
+        "nombre": "the United States Poland Mexico Brazil Canada",
+        "significado": "Estados Unidos, Polonia, México, Brasil, Canadá",
+        "sonido": 8
+    },
+    {
+        "nombre": "Italy France Spain Thailand England",
+        "significado": "Italia, Francia, España, Tailandia, Inglaterra",
+        "sonido": 9
+    },
+    {
+        "nombre": "Colombia Russia Turkey Australia China South Korea Germany Algeria Sudan",
+        "significado": "Colombia Rusia Turquía Australia China Corea del Sur Alemania Argelia Sudán",
+        "sonido": 10
+    }  
+]  

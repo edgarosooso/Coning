@@ -1,0 +1,208 @@
+/* Para pantallas extra pequeñas, por ejemplo, teléfonos en orientación retrato */
+@media (max-width: 575.98px) {
+
+	.nombreJugador {
+		font-size: 7pt;
+	}
+
+	.bloqueInfo {
+		background-color: #00000093;
+		position: fixed;
+		bottom: 0;
+		margin-bottom: 1.5vh;
+		left: 10%;
+	}
+
+	.avatarJugador {
+		width: 14vh;
+		height: auto;
+		margin-left: 0vw;
+	}
+
+	#juego {
+		height: auto;
+
+	}
+
+	#cuadro {
+		width: auto;
+		height: auto;
+
+	}
+
+	#imagen {
+		margin-left: 2vw;
+		margin-top: 1vh;
+	}
+
+	#cajaAlerta {
+		top: 40%;
+		width: 40vw;
+		left: 50%;
+	}
+
+	.loading-screen img {
+		height: 30%;
+		width: auto;
+		transform: scale(1.7);
+		margin-bottom: 20vh;
+	}
+}
+
+/* Para pantallas pequeñas, por ejemplo, teléfonos en orientación retrato */
+@media (min-width: 576px) {
+	#juego {
+		padding-top: 10%;
+	}
+
+	.nombreJugador {
+		font-size: 8pt;
+		margin-top: 0%;
+	}
+
+	.avatarJugador {
+		width: 14vh;
+		height: auto;
+		margin-left: 0.5vw;
+	}
+
+	.nombreJugador {
+		font-size: 7pt;
+	}
+
+	.bloqueInfo {
+		background-color: #00000093;
+		position: fixed;
+		bottom: 5%;
+		margin-bottom: 1.5vh;
+		left: 20%;
+	}
+
+	#cuadro {
+		width: auto;
+		height: auto;
+		margin-bottom: 0%;
+		padding-bottom: 0%;
+		height: 30%;
+	}
+}
+
+/* Pantallas medianas (tablets, entre 600px y 992px) */
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+	#juego {
+		padding-left: 15%;
+		padding-top: 4%;
+
+	}
+
+	.loading-screen img {
+		height: 30%;
+		width: auto;
+		transform: scale(1.7);
+		margin-bottom: 20vh;
+	}
+
+	.avatarJugador {
+		width: 13vh;
+		height: auto;
+		z-index: 99;
+		margin-top: 2%;
+	}
+
+	.nombreJugador {
+		font-size: 7pt;
+	}
+
+	#cuadro {
+		margin-bottom: 0%;
+		padding-bottom: 0%;
+		width: auto;
+		height: auto;
+	}
+}
+
+/* Media query para tamaño "lg" (large) en Ionic */
+@media (min-width: 992px) {
+	#juego {
+		padding-left: 15%;
+	}
+
+	#cuadro {
+		margin-bottom: 0%;
+		padding-bottom: 0%;
+		width: auto;
+		height: auto;
+	}
+
+	.avatarJugador {
+		margin-left: 15%;
+		width: 12vh;
+		height: auto;
+	}
+
+	.avatarJugador {
+		margin-left: 0%;
+		width: 15vh;
+		height: auto;
+		z-index: 99;
+		margin-top: 2%;
+	}
+
+	.nombreJugador {
+		margin-top: 0%;
+		font-size: 15pt;
+	}
+
+	.puntaje {
+		font-size: 30pt;
+	}
+
+	.cronometro {
+		font-size: 20pt;
+
+	}
+
+}
+
+/* Pantallas grandes (escritorio, mayor a 992px) */
+@media only screen and (min-width: 1000px) {
+	#imagen {
+		width: 10vw;
+		height: auto;
+		margin-left: 1vw;
+		margin-top: 1vh;
+	}
+
+	.avatarJugador {
+		margin-left: auto;
+		width: 13vh;
+		height: auto;
+		margin-top: 0%;
+	}
+
+	#juego {
+		padding-top: 5%;
+		padding-left: 6%;
+	}
+}
+
+ion-content {
+	--background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.centered-image {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+
+.centered-image img {
+	max-width: 100%;
+	max-height: 100%; 
+	
+}

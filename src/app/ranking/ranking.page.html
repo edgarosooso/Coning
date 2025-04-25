@@ -1,0 +1,98 @@
+<div>
+  <ion-row class="fondo" id="cajaHeader">
+
+    <ion-col size="6" offset="3" class="ion-text-center">
+      <strong id="Online">Online</strong>
+
+      <h1 id="Ranking">Ranking</h1>
+
+      <div class="fire-strip">
+        <div class="campfire">
+          <div class="flame flame1"></div>
+          <div class="flame flame2"></div>
+          <div class="flame flame3"></div>
+          <div class="flame flame4"></div>
+          <div class="sparks spark1"></div>
+          <div class="sparks spark2"></div>
+          <div class="sparks spark3"></div>
+        </div>
+      </div>
+
+      <div class="fire-strip2">
+        <div class="campfire">
+          <div class="flame flame1"></div>
+          <div class="flame flame2"></div>
+          <div class="flame flame3"></div>
+          <div class="flame flame4"></div>
+          <div class="sparks spark1"></div>
+          <div class="sparks spark2"></div>
+          <div class="sparks spark3"></div>
+        </div>
+      </div>
+
+      <div class="fire-strip3">
+        <div class="campfire">
+          <div class="flame flame1"></div>
+          <div class="flame flame2"></div>
+          <div class="flame flame3"></div>
+          <div class="flame flame4"></div>
+          <div class="sparks spark1"></div>
+          <div class="sparks spark2"></div>
+          <div class="sparks spark3"></div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</div>
+
+
+
+
+<ion-content id="listaContent" #listaContent>
+  <ion-row>
+    <ion-col class="ion-text-center" size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="7" offset-lg="2.5"
+      size-xl="5" offset-xl="3.5">
+      <ion-infinite-scroll-content>
+        <ion-list>
+          <div *ngFor="let jugador of jugadores; let i = index" class="card ion-text-center"
+            [ngClass]="{'highlighted': i == indexResaltado}">
+            <ion-item>
+              <h1 id="posicion" slot="start">{{ jugador.Posicion }}</h1>
+              <ion-avatar>
+                <img [src]="jugador.rutaAvatar">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ jugador.nombre }}</h2>
+                <p id="ICO">Ico: <strong id="numeroICO">{{ jugador.Ico }}</strong></p>
+              </ion-label>
+              <div class="stats">
+                <div id="won">
+                  <p>Won</p>
+                  <p>{{ jugador.Ganadas }}</p>
+                </div>
+                <div id="lost">
+                  <p>Lost</p>
+                  <p>{{ jugador.Perdidas }}</p>
+                </div>
+                <div id="tie">
+                  <p>Tie</p>
+                  <p>{{ jugador.Empatadas }}</p>
+                </div>
+              </div>
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-infinite-scroll-content>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+
+<ion-row class="fondo" id="regresarCaja">
+  <ion-col size-xl="2" offset-xl="5" size-lg="2" offset-lg="5" size-md="4" offset-md="4" size-sm="4" offset-sm="4"
+    size-xs="6" offset-xs="3" class="ion-text-center">
+    <div id="btnRegresar" (click)="regresar()">
+      <p>Return</p>
+    </div>
+  </ion-col>
+</ion-row>

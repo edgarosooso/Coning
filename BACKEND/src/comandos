@@ -1,0 +1,140 @@
+/* para que se hagan los cmnbios automaticamente 
+
+
+
+ npm install nodemon --save-dev scripts  asi
+
+ "scripts": {
+    "dev": "nodemon babel-node src/index.js"
+  },
+  "keyword
+
+*/
+
+ 
+var datosRecibidos = [];
+var soketOut = 0;
+
+
+
+  //console.log('\x1b[44m%s\x1b[0m', " ----- el id del socket... ----- ", socket.id, ' nombre sala ', nameRoom);
+
+
+
+  //   -------------------  RECIBIR INFORMACION DEL HOME   -------------------
+  socket.on('conectarme-home', async (nombreJugador) => {
+    /*
+        const { nameRoom } = Socket.handshake.query;
+        console.log('\x1b[44m%s\x1b[0m', " ----- el id del socket... ----- ", socket.id, ' nombre sala ',nameRoom);
+        socket.join(nameRoom);
+    */
+
+
+
+    console.log('\x1b[44m%s\x1b[0m', " conectarme-home----- ");
+
+    jugadores.push({ iDSocket: socket.id, nombreJugador: nombreJugador })
+
+    io.emit('rta-coneccion-servidor', {
+      NombreDejugadores: jugadores,
+    });
+
+    // --------------------- RECIBIR INVITACION DEL JUGADOR  --------------------- 
+  socket.on('invitar-a-jugar', async (nombreJugador) => {
+    //
+    // recibir informacion del jugador a invitar, buscar por el nombre en el array para enviarle la invitacion
+    // enviar recibido de invitacion 
+
+    io.to(socket.id).emit('opciones', {
+      opc: 0,
+    });
+
+    console.log('invitar-a-jugar');
+    invitarAJugar(nombreJugador);
+
+
+
+  });
+
+
+  // --------------------- RECIBIR INVITACION DEL JUGADOR  --------------------- 
+  socket.on('default', (res) => {
+    const data = res;
+    console.log('llego default ', data);
+  });
+
+
+});
+
+function invitarAJugar(sDatoABuscar) {
+  console.log("entro a buscar jugador invitado", sDatoABuscar)
+
+  jugadores.forEach(function (jugad, index, object) {
+    if (jugad.nombreJugador === sDatoABuscar) {
+      console.log("encontro jugador invitado", object[index].iDSocket)
+
+      soketOut = object[index].iDSocket;
+
+      // --- enviar invitacion al jugador ----------
+      io.to(soketOut).emit('opciones', {
+        opc: 1,
+      });
+
+    }
+  });
+
+  
+}
+
+
+ 
+
+
+
+  
+      
+
+//    jugadores.push({ iDSocket: socket.id, nombreJugador: nombreJugador })
+
+   // socket.to(nameRoom).emit('evento', res);
+
+    //console.clear();
+//    console.log('\x1b[44m%s\x1b[0m', " -evento - ", res, ' socket ', socket.id, ' sala ', nameRoom);
+
+    //console.log('\x1b[44m%s\x1b[0m', " -evento - ", res);
+
+
+     /* ----------------------------------------------------------------------------------
+                                    invitar a jugar
+   ---------------------------------------------------------------------------------- 
+
+  function invitarAJugar(sNombreABuscar) {
+    console.log("entro a buscar jugador invitado", sNombreABuscar)
+    // buscar para sacar el id del socket para poder enviarle
+    jugadores.forEach(function (jugad, index, object) {
+      if (jugad.nombreJugador === sNombreABuscar) {
+        console.log("encontro jugador invitado", object[index].iDSocket)
+
+        soketOut = object[index].iDSocket;
+
+        // --- enviar invitacion al jugador ----------
+        io.to(soketOut).emit('evento', {
+          opcion: 'invitar-jugar',
+          jugador: sNombreABuscar,
+        });
+      }
+    });
+
+    */
+
+  /* ----------------------------------------------------------------------------------
+    enviar respueta al que invito al jugador para que espere la aceptacion
+  ---------------------------------------------------------------------------------- 
+
+  io.to(socket.id).emit('evento', {
+    opcion: 'rta-invitar-jugar',
+    jugador: sNombreABuscar,
+  });
+
+}
+*/

@@ -1,0 +1,88 @@
+<ion-content [fullscreen]="true">
+  <!-- Loading Screen -->
+   <div class="loading-screen" *ngIf="isLoading">
+    <img src="../../assets/img/gif/splash-Loading.gif">
+  </div>
+  
+
+
+
+  <!-- El contenido de tu aplicación va aquí -->
+  <router-outlet></router-outlet>
+  <div id="fondo">
+    <ion-row id="espacioJuego">
+
+      <ion-col size-xs="3.5" offset-xs="0" size-sm="3.5" offset-sm="0.5" offset-md="1" offset-xs="0" size-xl="2"
+        offset-xl="2.5" size-md="3" size-lg="2.5" offset-lg="2">
+        <div class="cajaPuntaje">
+          <ion-row>
+
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+              <img class="avatarJugador" [src]=" imgAvatarJugador1">
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <p class="nombreJugador"> {{nombreJugador1}}    </p>
+              <h3 class="icoJugador"><strong style="color: #269dff;">ICO</strong> {{Ico1}} </h3>
+            </ion-col>
+          </ion-row>
+
+        </div>
+      </ion-col>
+
+      <ion-col size-xs="5" size-sm="4" size-xl="3" size-md="5" size-lg="5">
+        <div id="palabra">
+          <ion-row>
+            <ion-col class="ion-text-center" size="6" offset="0">
+              <h2 class="puntaje"> {{puntosA}}</h2>
+              <h3 class="cronometro"> {{displayTimeA}} </h3>
+            </ion-col>
+            <!-- <button (click)="random()"   >    {{ edgar }} </button> -->
+            <ion-col class="ion-text-center" size="6">
+              <h1 class="puntaje">{{puntosB}} </h1>
+              <h3 class="cronometro"> {{displayTimeB}} </h3>
+            </ion-col>
+          </ion-row>
+        </div>
+
+
+      </ion-col>
+
+      <ion-col size-xs="3.5" size-sm="3.5" size-xl="2" size-md="3" size-lg="2.5">
+        <div class="cajaPuntaje">
+
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+              <img class="avatarJugador" [src]="imgAvatarJugador2">
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <p class="nombreJugador"> {{nombreJugador2}} </p>
+              <h3 class="icoJugador"><strong style="color: #269dff;">ICO </strong>{{Ico2}}</h3>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xl="7" size-lg="8" size-md="10" size-sm="11" size-xs="12" offset-lg="2" offset-xl="2.5"
+        offset-md="1" offset-sm="0.5" class="ion-text-center">
+        <div id="juego" class="ion-text-center">
+          <!--  ----------------------------------- ------------------   LOS CUADROS DEL JUEGO --------------------------------  -->
+          <ion-card-content id="cardJuego" class="ion-text-center">
+            <ion-row class="ion-text-center">
+              <ion-col id="columnaCuadro" size-lg="2" size-xs="3" offset-xs="0" offset-lg="0.2"
+                *ngFor="let item of listaTarjetas;  index as i" class="ion-text-center animated slideInUp">
+                <div id="cuadro" [class.sinTurno]="miTurno" [class.fadeOut]="hideButton[i]" class="ion-text-center">
+                  <!--   <img src="../../assets/img/Moneda.png"> 
+                <img src="../../assets/img/gif/fichaPortal.gif"> -->
+                  <img src="{{ imagenes[i % imagenes.length] }}">
+                </div>
+                <img id="imagen" src={{image[i]}} [hidden]="hideImage[i]" [class.fadein]="!hideImage[i]">
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

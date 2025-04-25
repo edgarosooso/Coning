@@ -1,0 +1,7 @@
+{
+  "name": "coning",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

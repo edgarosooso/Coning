@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-140px) scale(1.2);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+ion-content {
+  --background: radial-gradient(circle, rgba(42, 169, 211, 1) 0%, rgba(0, 96, 138, 1) 100%);
+  height: 100vh;
+}
+
+ion-list {
+  border-radius: 20px;
+  background-color: rgb(210, 210, 210);
+  animation: scaleList 4s;
+  transition: all 0.2s;
+}
+
+@keyframes scaleList {
+  from {
+    height: 0px;
+  }
+
+  to {
+    height: 800px;
+  }
+}
+
+.fondo {
+  background: radial-gradient(circle, rgba(42, 169, 211, 1) 0%, rgba(0, 96, 138, 1) 100%);
+}
+
+.card {
+  margin: 10px;
+  border-radius: 20px;
+  background-color: rgb(210, 210, 210);
+  transition: all 0.5s;
+}
+
+#listaContent {
+  height: 800
+}
+
+#Ranking {
+  font-family: heavitas;
+  letter-spacing: 3px;
+  color: rgb(255, 255, 255);
+  margin-top: 0%;
+  filter: drop-shadow(0px 4px 10px black);
+}
+
+#Online {
+  font-family: Raleway;
+  letter-spacing: 3px;
+  color: rgb(65, 217, 255);
+  margin-top: 50px;
+}
+
+#cajaHeader {
+  padding-top: 30px;
+}
+
+ion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 25px;
+  --background: radial-gradient(circle, rgb(34, 154, 194) 0%, rgba(0, 96, 138, 1) 100%);
+  box-shadow: 0px 4px 3px gray;
+  transition: all 0.5s;
+  animation: slideIn 0.4s;
+}
+
+.card :hover {
+  opacity: 0.8;
+  transform: scale(1.01);
+}
+
+#posicion {
+  font-family: Lato;
+  font-weight: 1000;
+  margin-left: 5%;
+  margin-right: 2%;
+  color: #ffffff;
+  font-size: 25pt;
+  margin-top: 3%;
+  filter: drop-shadow(0px 2px 5px rgb(255, 255, 255));
+}
+
+h2 {
+  font-family: heavitas;
+  filter: drop-shadow(0px 2px 3px black);
+}
+
+#ICO {
+  background-color: rgb(0, 0, 0);
+  width: 65%;
+  padding-left: 5px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: #ffb300;
+  font-family: 'heavitas';
+}
+
+@media (max-width: 575.98px) {
+  #ICO {
+    width: 85%;
+  }
+}
+
+#numeroICO {
+  color: white;
+  font-family: Lato;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  font-size: 13pt;
+  margin-right: 10%;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.stats p {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+ion-card.highlight {
+  border: 2px solid #3880ff;
+  background-color: #1ba8ba !important;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+#won {
+  color: rgb(0, 247, 255);
+}
+
+#lost {
+  color: rgb(166, 166, 166);
+}
+
+#tie {
+  color: rgb(166, 166, 166);
+}
+
+#btnRegresar {
+  clip-path: polygon(0 50%, 13% 0, 100% 0, 100% 100%, 100% 60%, 90% 100%, 0% 100%, 0 80%);
+  border: solid 2px #ed9227;
+  transition: all 0.2s ease-out;
+  background-color: #8c5912;
+  width: auto;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.568);
+  transition: 0.3s;
+  cursor: pointer;
+  filter: drop-shadow(10px 10px white);
+  font-family: heavitas;
+  letter-spacing: 1px;
+  color: #ffeeda;
+}
+
+#regresarCaja {
+  padding-top: 3%;
+  padding-bottom: 3%;
+  transition: all 0.3s;
+}
+
+#btnRegresar:hover {
+  transform: scale(1.07);
+  clip-path: polygon(0 0%, 13% 0, 100% 0, 100% 100%, 100% 60%, 100% 100%, 0% 100%, 0 80%);
+  background-color: #c0760f;
+  letter-spacing: 3px;
+  color: white;
+}

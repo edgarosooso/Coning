@@ -1,0 +1,222 @@
+
+  
+  .card.ganador {
+    opacity: 1;
+   
+  }
+
+
+  
+  .card {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    transition: all 1s;
+    animation: entrada 0.5s ease-out;
+    opacity: 1;
+  
+  
+  
+  }
+  
+  @keyframes entrada {
+    0% {
+      transform: scale(1.9);
+    }
+  
+    100% {
+      transform: scale(1);
+  
+  
+    }
+  }
+  
+  
+  
+  
+  
+  
+  .imgJugador {
+    border-radius: 20px;
+     
+    transform: scale(0.5);
+    transition: ease-in-out 0.5s;
+    margin-bottom: 0%;
+    border-bottom: 0%;
+    padding-bottom: 0%;
+  
+  }
+  
+ 
+  
+  @keyframes entrada2 {
+    0% {
+      transform: scale(1.3);
+      opacity: 0%;
+    }
+  
+  
+    70% {
+      transform: scale(1.5);
+      opacity: 100%;
+    }
+  
+  
+    100% {
+      transform: scale(1);
+      opacity: 100%;
+    }
+  
+  
+  }
+  
+  #contenedorResultado{
+    background: rgb(42,169,211);
+    background: radial-gradient(circle, rgba(42,169,211,1) 0%, rgba(0,96,138,1) 100%);
+    margin-top: 5%;
+    padding-top: 1%;
+    border-radius: 50px;
+    box-shadow: 0px 6px 6px 10px rgba(0, 0, 0, 0.16);
+    padding-bottom: 5%;
+  }
+  
+  
+  .puntos {
+
+    margin-top: -15%;
+    padding-top: 0%;
+  
+    color: #ffe400;
+    font-size: 65pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    transition: 1s;
+    animation: entrada2 ease-in-out 0.5s;
+    
+  
+  
+  
+  }
+  
+  .nombreJugador {
+    font-size: 20pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+    color: #ffffff;
+  
+    
+  
+  }
+  
+  .ico {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 20pt;
+  }
+  
+  
+  
+  
+  /* Extra Small devices (phones, less than 576px) */
+  @media (max-width: 575.98px) {
+ 
+  }
+  
+  /* Small devices (phones, 576px and up) */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+  
+  
+  }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+  
+    
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    
+  }
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+   
+  }
+  
+  
+  
+  
+  @keyframes shine {
+    to {
+      left: 150%;
+    }
+  }
+  
+  #fondo {
+  	background: rgb(42,169,211);
+  	background: radial-gradient(circle, rgba(42,169,211,1) 0%, rgba(0,96,138,1) 100%);
+	  height: 100vh;
+  }
+  
+  
+  #btnEntrar {
+    margin-top: 3vh;
+    margin-bottom: -7px;
+    border: 1px ridge #ffffff;
+    border-radius: 5px;
+    height: 5vh;
+    display: grid;
+    place-content: center;
+    transition: all 0.3s ease-in-out;
+    font-size: 13pt;
+    background-color: #040404;
+    color: #10b967;
+    font-family: 'subtitulos';
+  
+  }
+  
+  #btnEntrar:hover {
+    border: 0px;
+    border-radius: 10px;
+    transform: scale(1.1);
+    background-color: #10b967;
+    color: #0e0e0e;
+    cursor: pointer;
+    -webkit-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+  }
+  
+  #btnEntrar:active {
+    transform: scale(0.9);
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 76, 255);
+  }
+  
+  #btnRegresar{
+    margin-top: 3vh;
+    margin-bottom: -7px;
+    border: 1px ridge #ffa600;
+    border-radius: 5px;
+    height: 5vh;
+    display: grid;
+    place-content: center;
+    transition: all 0.3s ease-in-out;
+    font-size: 13pt;
+    background-color: #d9d9d900;
+    color: #ffa600;
+    font-family: 'subtitulos';
+  }
+  
+  #btnRegresar:hover {
+    border: 0px;
+    border-radius: 10px;
+    transform: scale(1.1);
+    background-color: #fdbc39;
+    color: #0e0e0e;
+    cursor: pointer;
+    -webkit-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: -2px -4px 71px 0px rgba(0, 0, 0, 0.6);
+  }
+  

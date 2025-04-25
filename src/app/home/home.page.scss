@@ -1,0 +1,324 @@
+#btnLogIn{
+  margin-top: 0vh;
+  border-radius: 15px;
+  height: 10vh;
+  display: grid;
+  place-content: center;
+  transition: all 0.3s ease-in-out;
+  font-family: 'ConingFont';
+  font-size: 20pt;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 15vw;
+
+}
+
+
+#iconoConing{
+  position: fixed;
+  bottom: 6%;
+  right: 2%;
+  width: 3.5%;
+  height: auto;
+
+}
+
+#btnLogIn:hover{
+  border: 0px;
+  border-radius: 10px;
+  transform: scale(1.1);
+  background-color: rgb(30, 98, 193);
+  color: white;
+  cursor: pointer;
+  -webkit-box-shadow: -2px -4px 71px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: -2px -4px 71px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);    
+}
+#btnLogIn:active{
+  transform: scale(1);
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+  color:  rgb(0, 76, 255);
+}
+
+
+#contenedorUser{
+  padding-top: 30vh;
+
+  
+}
+
+.card {
+  clip-path: polygon(0 20%, 30% 0, 100% 0, 100% 100%, 100% 80%, 80% 100%, 0% 100%, 0 85%);
+
+  border: solid 2px #ed9227;
+  transition: all 0.2s ease-out;
+  background-color: #00608a;
+    
+  width: 90%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.568);
+  transition: 0.3s;
+
+ 
+}
+
+.img{
+  transition: 0.5s;
+  clip-path: polygon(0 20%, 30% 0, 100% 0, 100% 100%, 100% 80%, 80% 100%, 0% 100%, 0 85%);
+
+
+}
+
+#avatar{
+  width: 50%;
+  border-radius: 150px;
+}
+
+h2{
+  color: #ffb14c;
+  font-family: 'heavitas';
+  font-size: 3vh;
+  transition: 0.3s;
+  z-index: 999;
+  position: relative;
+  
+}
+
+#fondo {
+  background: rgb(42,169,211);
+  background: radial-gradient(circle, rgba(42,169,211,1) 0%, rgba(0,96,138,1) 100%);
+
+  height: 100vh; 
+}
+
+.subtitulo { 
+  color: #00c6ff;
+  font-size: 10pt;
+  margin-top: -2vh;
+}
+
+.titulo {
+  color: white;
+  font-family: Subtitulos;
+  font-size: 20pt;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  opacity: 1;
+  clip-path: polygon(0 0%, 0% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0% 100%, 0 85%);
+  cursor: pointer;
+  border-color: white ;
+  
+
+
+  .img{
+    transform: scale(0.9);
+  
+    clip-path: polygon(0 0%, 0% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0% 100%, 0 85%);
+    border-radius: 20px;
+ 
+    
+  }
+
+  h2{
+    color: white;
+ 
+    text-shadow: 10px black;
+    transform: scale(1.1);
+    
+  }
+  
+
+h3{
+  color: black;
+}
+
+
+}
+
+ion-input{
+  border-radius: 5px;
+  padding-left: 5vw;
+  
+}
+.card:active {
+  transform: scale(1);
+}
+
+#footer {
+  font-size: 8pt;
+  color: gray;
+}
+
+#usuariosOnline {
+  color: #00c6ff;
+  border: solid 2px white;
+  background-color: gray;
+  height: auto; /* Cambiado a auto para adaptarse al contenido */
+  transition: all 1s;
+  opacity: 0.95;
+}
+
+swiper-container{
+  position: relative;
+
+  height: auto;
+  margin-top: 8vh;
+  overflow: hidden; 
+}
+
+swiper-slide{
+  margin-top: 15vh;
+}
+
+.swiper-container:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, rgba(255,255,255,0.9) 10%, transparent 25%, transparent 75%, rgba(255,255,255,0.9) 90%);
+  pointer-events: none;
+   }
+
+   h3{
+    font-family: 'Roboto', sans-serif;
+    color: #cdcdcd;
+    font-size: 15pt;
+   }
+
+
+   #ico{
+    color: rgb(161, 210, 255);
+  }
+
+  #footer{
+    background-color: black;
+  }
+  
+
+/* Smartphones (portrait and landscape) ---------- */
+@media only screen and (max-width: 600px) {
+
+  #contenedorInput{
+    z-index: 99;
+ 
+  }
+
+
+  swiper-container{
+    margin-top: 2vh;
+    padding-top: 0vh;
+  }
+
+  
+h2{
+ 
+  font-size: 1.5vh;
+}
+
+
+#avatar{
+  height: 15vh;
+  width: auto;
+}
+  
+
+
+
+  
+  swiper-slide{
+    margin-top: 0vh;
+    margin-left: -2vw;
+  }
+  
+  #contenedorUser{
+    padding-top: 10vh;      
+  }
+
+  #iconoConing{
+    position: fixed;
+    bottom: 7%;
+    right: 3%;
+    width: 11%;
+    height: auto;
+  
+  }
+  
+}
+
+
+
+/* Tablet(portrait and landscape) ---------- */
+@media only screen and (min-width: 768px) and (max-width: 991.5px) {
+  #avatar{
+    margin-top: 5vh;
+    height: 20vh;
+    width: auto;
+  }
+
+  #contenedorUser{
+    padding-top: 2vh;      
+  }
+
+  swiper-container{
+    margin-top: -12vh;
+  }
+
+  h2{
+ 
+    font-size: 1.5vh;
+  }
+
+  #iconoConing{
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+    width: 7%;
+    height: auto;
+  
+  }
+  
+    
+}
+
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+
+  #contenedorInput{
+    z-index: 99;
+ 
+  }
+
+
+  swiper-container{
+    margin-top: 2vh;
+    padding-top: 0vh;
+  }
+
+  
+h2{
+ 
+  font-size: 1.5vh;
+}
+
+
+#avatar{
+  height: 15vh;
+  width: auto;
+}
+   
+  swiper-slide{
+    margin-top: 0vh;
+    margin-left: -2vw;
+  }
+  
+  #contenedorUser{
+    padding-top: 10vh;      
+  }
+   
+}
+
+ 

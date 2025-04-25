@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div id="fondo">
+    <ion-row>
+      <ion-col id="logo" size-lg="1.5" offset-lg="10" size-xs="4" offset-xs="7.7" class="ion-text-end">
+        <img src="../../assets/img/ConingLogo.png">
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size-lg="3" size-sm="12" size-md="3" offset="1.5" size-xs="8" offset-xs="2">
+        <ion-card id="tu">
+          <!--<img routerLink="/jugadores" src="../../assets/img/doka.png" />-->
+
+          <img routerLink="/jugadores" [src]="imgAvatarConectado" />
+          <!--ConcentraDoka-->
+          <ion-card-header>
+            <ion-card-title id="subtituloTu"> {{ usuario }} (Tú)</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-subtitle id="ICOTu">ICO {{ico}} </ion-card-subtitle>
+          </ion-card-content>
+          <br>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col size-lg="6.5" offset-lg="0.2" size-md="7" offset-md="0" offset-xs="0" size-xs="12"
+        id="Jugadores conectados" id="cajaJugadoresConectados">
+        <ion-row>
+          
+
+          <ion-col size-lg="3" offset-lg="0.3" size-xs="6" offset-xs="0" *ngFor="let jugador of jugadoresAvatar; let i = index">
+            <ion-card class="card" >
+              <img routerLink="/jugadores" [src]="jugador.rutaAvatar" />
+              <ion-card-header>
+                <ion-card-title class="subtitulo">{{ jugador.nombre }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-card-subtitle class="ICO">ICO {{ jugador.ico }}</ion-card-subtitle>
+              </ion-card-content>
+              <div (click)="invitacionAJugar(jugador.nombre, jugador.socketid, jugador.rutaAvatar )" id="btnEntrar" class="ion-text-center">
+                Desafiar</div>
+
+            </ion-card>
+      
+          </ion-col>
+          
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+
+  </div>
+
+</ion-content>
