@@ -28,7 +28,7 @@ const config: SocketIoConfig = {
   ],
   providers: [
     AndroidPermissions,
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    //{ provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

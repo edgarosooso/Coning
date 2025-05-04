@@ -5,6 +5,8 @@ ionViewWillLeave: Se activa cuando la página está a punto de dejar de ser la p
 ionViewDidLeave: Se dispara después de que la página ha dejado de ser visible.
 */
 /* edgar osorio */
+import { AuthService } from '../services/auth.service';
+
 import {
   Component,
   OnInit,
@@ -44,7 +46,8 @@ export class HomePage implements OnInit {
     private navCtrl: NavController,
     private conexionesService: ConexionesService,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -181,59 +184,92 @@ export class HomePage implements OnInit {
   }
 
   // -------------------------------------- VALIDAR LOGIN  -----------------------------------
-  login(usuario: string, clave: string) {
-    // Inicialización del estado de inicio de sesión
-    localStorage.setItem('id', '-1');
-    localStorage.setItem('icoTabla', '0');
-    localStorage.setItem('ingreso', 'no');
 
-    this.rutaAvatar = '../../assets/avatar/' + usuario + '.png';
-
-    if (!usuario || !clave) {
-      this.presentAlert('Ingrese usuario y clave.');
-      return; // Salir de la función si las credenciales son inválidas
-    }
-
-    this.conexionesService.getlogin<any>(usuario, clave).subscribe({
-      next: (datos) => {
-        if (datos && datos.length > 0) {
-          const usuarioData = datos[0]; // Obtener el primer resultado
-
-          // Actualizar el estado de la aplicación con los datos del usuario
-          this.rutaAvatar = usuarioData.rutaAvatar;
-          this.nombre = usuarioData.nombre;
-          this.ico = usuarioData.Ico;
+  login(user: string, pass: string) {
+    this.authService.consultarLogin(user, pass).subscribe({
+      next: (response) => {
+        if (
+          this.authService.estaAutenticado() &&
+          response &&
+          response.userData
+        ) {
+          // Los datos del usuario ya están en response.userData
+          this.rutaAvatar = response.userData.rutaAvatar;
+          this.nombre = response.userData.nombre;
+          this.ico = response.userData.Ico;
           this.showLogin = false;
-
-          // Almacenar datos en localStorage (considerar alternativas más seguras para datos sensibles)
-          localStorage.setItem('id', usuarioData.ID);
-          localStorage.setItem('icoTabla', usuarioData.Ico);
-          localStorage.setItem('Jugador1', usuarioData.nombre);
-          localStorage.setItem('avatar1', usuarioData.rutaAvatar);
-          localStorage.setItem('ingreso', 'si');
-          localStorage.setItem('viewHands', usuarioData.ViewAviso);
-          localStorage.setItem('nombreJugador1', usuarioData.nombre);
         } else {
-          // Manejar el caso de credenciales incorrectas
           this.presentAlert('Usuario o contraseña incorrectos.');
-          this.rutaAvatar = '../../assets/avatar/eli.png'; // Imagen por defecto en caso de error
+          this.rutaAvatar = '../../assets/avatar/eli.png';
           this.nombre = '';
           this.ico = 0;
         }
       },
-
       error: (error) => {
         this.presentAlert(
           'Error al iniciar sesión. Por favor, inténtelo de nuevo. ' +
             JSON.stringify(error)
         );
-
         this.rutaAvatar = '../../assets/avatar/eli.png';
         this.nombre = '';
         this.ico = 0;
       },
     });
   }
+
+  // login(usuario: string, clave: string) {
+  //   // Inicialización del estado de inicio de sesión
+  //   localStorage.setItem('id', '-1');
+  //   localStorage.setItem('icoTabla', '0');
+  //   localStorage.setItem('ingreso', 'no');
+
+  //   this.rutaAvatar = '../../assets/avatar/' + usuario + '.png';
+
+  //   if (!usuario || !clave) {
+  //     this.presentAlert('Ingrese usuario y clave.');
+  //     return; // Salir de la función si las credenciales son inválidas
+  //   }
+
+  //   this.conexionesService.getlogin<any>(usuario, clave).subscribe({
+  //     next: (datos) => {
+  //       if (datos && datos.length > 0) {
+  //         const usuarioData = datos[0]; // Obtener el primer resultado
+
+  //         // Actualizar el estado de la aplicación con los datos del usuario
+  //         this.rutaAvatar = usuarioData.rutaAvatar;
+  //         this.nombre = usuarioData.nombre;
+  //         this.ico = usuarioData.Ico;
+  //         this.showLogin = false;
+
+  //         // Almacenar datos en localStorage (considerar alternativas más seguras para datos sensibles)
+  //         localStorage.setItem('id', usuarioData.ID);
+  //         localStorage.setItem('icoTabla', usuarioData.Ico);
+  //         localStorage.setItem('Jugador1', usuarioData.nombre);
+  //         localStorage.setItem('avatar1', usuarioData.rutaAvatar);
+  //         localStorage.setItem('ingreso', 'si');
+  //         localStorage.setItem('viewHands', usuarioData.ViewAviso);
+  //         localStorage.setItem('nombreJugador1', usuarioData.nombre);
+  //       } else {
+  //         // Manejar el caso de credenciales incorrectas
+  //         this.presentAlert('Usuario o contraseña incorrectos.');
+  //         this.rutaAvatar = '../../assets/avatar/eli.png'; // Imagen por defecto en caso de error
+  //         this.nombre = '';
+  //         this.ico = 0;
+  //       }
+  //     },
+
+  //     error: (error) => {
+  //       this.presentAlert(
+  //         'Error al iniciar sesión. Por favor, inténtelo de nuevo. ' +
+  //           JSON.stringify(error)
+  //       );
+
+  //       this.rutaAvatar = '../../assets/avatar/eli.png';
+  //       this.nombre = '';
+  //       this.ico = 0;
+  //     },
+  //   });
+  // }
 
   // login(usuario: string, clave: string) {
   //   localStorage.setItem('id', '-1');
