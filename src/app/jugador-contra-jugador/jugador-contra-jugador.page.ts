@@ -13,20 +13,20 @@ import { AlertController, NavController } from '@ionic/angular';
 import { Tarjeta } from '../../app/models/tarjeta.model';
 import { SeleccionService } from '../services/seleccion.service';
 import { Howl } from 'howler';
+
 // Ejemplo en un componente o servicio Angular
 import { ClickEventData } from '../models/click-event-data.model';
 import { GuardarResultadosService } from '../services/guardar-resultados.service';
 import { ServicioDeTemporizador } from '../services/timer.service.service';
 import { ConexionesService } from '../services/conexiones.service';
 
-
-
 @Component({
   selector: 'app-jugador-contra-jugador',
   templateUrl: './jugador-contra-jugador.page.html',
   styleUrls: [
     './jugador-contra-jugador.page.scss',
-    './jugador-contra-jugador.page2.scss'
+    './jugador-contra-jugador.page1.scss',
+    './jugador-contra-jugador.page2.scss',
   ],
 })
 export class JugadorContraJugadorPage implements OnInit {
@@ -44,7 +44,6 @@ export class JugadorContraJugadorPage implements OnInit {
   private salioDelJuegoSubscription: Subscription | undefined;
   private seDesconectoSubscription: Subscription | undefined;
 
-
   ocultarMsgManos: boolean = true;
   id: number = -1;
   nombreJugador: string = 'edgar';
@@ -52,7 +51,7 @@ export class JugadorContraJugadorPage implements OnInit {
   online: string = '';
   icototal: number = 0;
   idTabla: number = 0;
-  showImage: boolean= false;
+  showImage: boolean = false;
 
   constructor(
     private socketWebService: SocketWebService,
@@ -71,43 +70,33 @@ export class JugadorContraJugadorPage implements OnInit {
     this.emitirJuego();
     this.recibirClick();
     this.seDesconecto();
-
   }
   // src/app/some-page/some-page.component.ts
-  lista: any[] = [];  // Inicializando como un arreglo vacío
+  lista: any[] = []; // Inicializando como un arreglo vacío
 
   ionViewDidEnter() {
-
     this.leerDelStorage();
     this.ocultarMsgManos = this.getBooleanFromLocalStorage('viewHands');
-    this.idTabla = Number(localStorage.getItem("id")) || -1;
-    this.imgAvatarConectado = localStorage.getItem("avatarConectado") || "";
-    this.usuarioAux = localStorage.getItem("usuario") || "";
+    this.idTabla = Number(localStorage.getItem('id')) || -1;
+    this.imgAvatarConectado = localStorage.getItem('avatarConectado') || '';
+    this.usuarioAux = localStorage.getItem('usuario') || '';
 
-
-
-
-
-    this.isLoading = true;;
+    this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
     }, 2500);
-
-
   }
-
 
   leerDelStorage() {
-    this.nombreJugador1 = localStorage.getItem("nombreJugador1") || "jugador1";
-    this.imgAvatarJugador1 = localStorage.getItem("avatar1") || "../assets/img/gif/Ficha1.gif'";
-    this.nombreJugador2 = localStorage.getItem("nombreJugador2") || "maquina";
-    this.imgAvatarJugador2 = localStorage.getItem("avatarjugador2") || "../assets/img/gif/Ficha1.gif'";
-    this.Ico1 = Number(localStorage.getItem("ico1")) || 70;
-    this.Ico2 = Number(localStorage.getItem("ico2")) || 70;
+    this.nombreJugador1 = localStorage.getItem('nombreJugador1') || 'jugador1';
+    this.imgAvatarJugador1 =
+      localStorage.getItem('avatar1') || "../assets/img/gif/Ficha1.gif'";
+    this.nombreJugador2 = localStorage.getItem('nombreJugador2') || 'maquina';
+    this.imgAvatarJugador2 =
+      localStorage.getItem('avatarjugador2') || "../assets/img/gif/Ficha1.gif'";
+    this.Ico1 = Number(localStorage.getItem('ico1')) || 70;
+    this.Ico2 = Number(localStorage.getItem('ico2')) || 70;
   }
-
-
-
 
   getBooleanFromLocalStorage(key: string): boolean {
     const value = localStorage.getItem(key);
@@ -115,43 +104,39 @@ export class JugadorContraJugadorPage implements OnInit {
   }
 
   ngOnInit() {
-
     this.lista = this.getListaInicial(); // Supón que tienes una función para obtener los datos iniciales
     console.log(this.lista);
     this.sonarAudio(true, 0);
 
-
-
-    this.bgcolor = "#28ba62";
+    this.bgcolor = '#28ba62';
     this.bBloqueado = 0;
     this.nombreJugador = 'jugador';
 
-
-
     this.imprimirTablaConsole();
 
-
     //   if (this.InicioElJuego == true) {
-    this.servicioDeTemporizador.verificarTemporizador1AlCero().subscribe(alCero => {
-      if (alCero) {
-        // Acción cuando el temporizador 1 llega a cero
-        //  alert('jugador ' + this.nombreJugador1 + '  ha perdido por tiempo');
-        this.servicioDeTemporizador.detenerTimer1()
-        this.servicioDeTemporizador.detenerTimer2()
-        //doka
-      }
-    });
+    this.servicioDeTemporizador
+      .verificarTemporizador1AlCero()
+      .subscribe((alCero) => {
+        if (alCero) {
+          // Acción cuando el temporizador 1 llega a cero
+          //  alert('jugador ' + this.nombreJugador1 + '  ha perdido por tiempo');
+          this.servicioDeTemporizador.detenerTimer1();
+          this.servicioDeTemporizador.detenerTimer2();
+          //doka
+        }
+      });
 
-    this.servicioDeTemporizador.verificarTemporizador2AlCero().subscribe(alCero => {
-      if (alCero) {
-        // Acción cuando el temporizador 2 llega a cero
-        alert('jugador ' + this.nombreJugador2 + '  ha perdido por tiempo');
-        this.servicioDeTemporizador.detenerTimer1()
-        this.servicioDeTemporizador.detenerTimer2()
-      }
-    });
-
-
+    this.servicioDeTemporizador
+      .verificarTemporizador2AlCero()
+      .subscribe((alCero) => {
+        if (alCero) {
+          // Acción cuando el temporizador 2 llega a cero
+          alert('jugador ' + this.nombreJugador2 + '  ha perdido por tiempo');
+          this.servicioDeTemporizador.detenerTimer1();
+          this.servicioDeTemporizador.detenerTimer2();
+        }
+      });
 
     const viewHandsString: string | null = localStorage.getItem('viewHands');
 
@@ -162,13 +147,7 @@ export class JugadorContraJugadorPage implements OnInit {
     } else {
       this.ocultarMsgManos = true;
     }
-
-
-
-
-
   }
-
 
   formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
@@ -178,20 +157,19 @@ export class JugadorContraJugadorPage implements OnInit {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-
-
   ocultarManos() {
     localStorage.setItem('viewHands', 'false');
     this.ocultarMsgManos = false;
 
-    this.conexionesService.UpdateViewAvisoById(this.idTabla).subscribe(datos => {
-      localStorage.setItem('viewHands', 'false')
-      this.ocultarMsgManos = false;
-    })
-
+    this.conexionesService
+      .UpdateViewAvisoById(this.idTabla)
+      .subscribe((datos) => {
+        localStorage.setItem('viewHands', 'false');
+        this.ocultarMsgManos = false;
+      });
   }
 
-  imgMatch: string = "../../assets/img/gif/Match.gif";
+  imgMatch: string = '../../assets/img/gif/Match.gif';
 
   controlarTimer: boolean = true;
 
@@ -203,8 +181,8 @@ export class JugadorContraJugadorPage implements OnInit {
   Ico1: number = 0;
   Ico2: number = 0;
 
-  displayTimeA = '';  // tiempo inicial formateado
-  displayTimeB = this.displayTimeA;  // tiempo inicial formateado
+  displayTimeA = ''; // tiempo inicial formateado
+  displayTimeB = this.displayTimeA; // tiempo inicial formateado
   veces: number = 0;
 
   countdownSubscription: Subscription | undefined;
@@ -214,11 +192,10 @@ export class JugadorContraJugadorPage implements OnInit {
 
   timeoutRef: any;
 
-
   showText = false;
 
   mensajeSistema = 'Texto inicial';
-  manoUrl = "../../assets/img/manos/sigues.png";
+  manoUrl = '../../assets/img/manos/sigues.png';
 
   // imagenes = ['../../assets/img/gif/Greekboton1.png',
   //   '../../assets/img/gif/Greekboton2.png',
@@ -229,20 +206,15 @@ export class JugadorContraJugadorPage implements OnInit {
   //   '../../assets/img/gif/Ficha2.gif',
   // ];
 
-
-
-  imagenes = ['../../assets/cards/Greekboton1.png',
+  imagenes = [
+    '../../assets/cards/Greekboton1.png',
     '../../assets/cards/Greekboton2.png',
     '../../assets/cards/Greekboton3.png',
   ];
 
-
-
-
   nombreJugador1: string = '';
 
-  nombreArchivoAsonar: string = ''
-
+  nombreArchivoAsonar: string = '';
 
   rangoNumeros: number[] = [];
 
@@ -256,7 +228,6 @@ export class JugadorContraJugadorPage implements OnInit {
   juegaHumano: boolean = true;
   socketUsuario: string = '';
 
-
   botonesAbierto: any[] = [];
   botonesAbiertoBackend: any[] = [];
   parejasHechas: number[] = [];
@@ -269,7 +240,7 @@ export class JugadorContraJugadorPage implements OnInit {
   hideButton: boolean[] = [];
   hideImage: boolean[] = []; // Inicializa hideImage como un array vacío
   imageTimeouts: any[] = []; // Array para almacenar los identificadores de temporizador
-  image: any[] = []
+  image: any[] = [];
   //turno: boolean;
   hora: string = '';
   nivel: number = 0;
@@ -286,14 +257,14 @@ export class JugadorContraJugadorPage implements OnInit {
   swJugadorInicia: number = 0;
   timerID: any;
   nombreJugador2: string = '';
-  nombreJugador_2: string = ''
-  rutaImagen: string = ''
-  sSocket: string = ''
-  numeroJugadores: string = ''
-  bgcolor: string = ''
+  nombreJugador_2: string = '';
+  rutaImagen: string = '';
+  sSocket: string = '';
+  numeroJugadores: string = '';
+  bgcolor: string = '';
   bBloqueado: number = 0;
   totalNiveles: number = 0;
-  nombreArchivo: string = ''
+  nombreArchivo: string = '';
   imgAvatarJugador1: string = '';
   imgAvatarJugador2: string = '';
   nombreImagen: string = '';
@@ -315,9 +286,8 @@ export class JugadorContraJugadorPage implements OnInit {
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
-    this.servicioDeTemporizador.detenerTimer1()
-    this.servicioDeTemporizador.detenerTimer2()
-
+    this.servicioDeTemporizador.detenerTimer1();
+    this.servicioDeTemporizador.detenerTimer2();
   }
 
   // Se ejecuta justo antes de que la página comience a dejar de ser visible
@@ -325,7 +295,6 @@ export class JugadorContraJugadorPage implements OnInit {
     console.log('Estoy dejando la página...', this.nombreSala);
 
     this.emitirSalidadDeJuego();
-
   }
 
   /* ----------------------------------------------------------------------------------
@@ -334,53 +303,45 @@ export class JugadorContraJugadorPage implements OnInit {
   actualizarJugador(idJugador: number, puntos: number) {
     if (idJugador >= 0) {
       this.conexionesService.putJugadores(idJugador, puntos).subscribe(
-        response => {
-
-          this.icototal = response[0].nuevoIco
+        (response) => {
+          this.icototal = response[0].nuevoIco;
         },
-        error => {
+        (error) => {
           console.error('Error al actualizar el jugador:' + error);
         }
       );
     }
-
   }
-
-
 
   /* ----------------------------------------------------------------------------------
                             validar click del boton
   ---------------------------------------------------------------------------------- */
-
 
   hizoClickBotones(botonNumero: number, nombre: string) {
     if (this.miTurno == false) {
       return; // Detener la ejecución de la función aquí
     }
 
-    this.sonidosdelJuego("Boton.wav");
+    this.sonidosdelJuego('Boton.wav');
 
     this.ocultarBotones[botonNumero] = true;
-    this.image[botonNumero] = this.rutaImagen + nombre + ".png"
+    this.image[botonNumero] = this.rutaImagen + nombre + '.png';
 
-    this.listaTarjetas[botonNumero].imagen = this.rutaImagen + nombre + ".png')"
+    this.listaTarjetas[botonNumero].imagen =
+      this.rutaImagen + nombre + ".png')";
 
-    this.fadeButton(botonNumero)
+    this.fadeButton(botonNumero);
 
-    this.enviarClick(botonNumero, nombre)
-
+    this.enviarClick(botonNumero, nombre);
   }
 
   toggleText(valor: boolean, texto: string, pareSigua: boolean) {
-
-
-
     this.showText = valor;
     this.mensajeSistema = texto;
     if (pareSigua === true) {
-      this.manoUrl = "../../assets/img/manos/sigues.png";
+      this.manoUrl = '../../assets/img/manos/sigues.png';
     } else {
-      this.manoUrl = "../../assets/img/manos/espera.png";
+      this.manoUrl = '../../assets/img/manos/espera.png';
     }
     setTimeout(() => {
       this.showText = !this.showText;
@@ -398,9 +359,6 @@ export class JugadorContraJugadorPage implements OnInit {
     return [0, 1, 2, 3]; // Tu lógica para obtener la lista
   }
 
-
-
-
   // /*----------------------------------------------------------------------------------------
   //                             ENVIAR INVITACION A JUGAR
   // -----------------------------------------------------------------------------------------*/
@@ -413,7 +371,6 @@ export class JugadorContraJugadorPage implements OnInit {
 
   //     this.imprimirTablaConsole();
 
-
   //   });
 
   //   this.socketWebService.emitEvent('invitar-A-jugar', {
@@ -423,7 +380,6 @@ export class JugadorContraJugadorPage implements OnInit {
   //     // Puedes añadir más datos necesarios para la invitación
   //   });
   // }
-
 
   /*----------------------------------------------------------------------------------------
                               ENVIAR CLICK
@@ -441,25 +397,25 @@ export class JugadorContraJugadorPage implements OnInit {
     });
   }
 
-
   recibirClick() {
     this.clickSubscription?.unsubscribe(); // Limpieza de suscripción
-    this.clickSubscription = this.socketWebService.onEvent('click').subscribe(datosClick => {
-      this.botonesAbierto = datosClick.botonesAbiertos;
-      this.validarJuegoEnParejas(datosClick);
-
-    });
+    this.clickSubscription = this.socketWebService
+      .onEvent('click')
+      .subscribe((datosClick) => {
+        this.botonesAbierto = datosClick.botonesAbiertos;
+        this.validarJuegoEnParejas(datosClick);
+      });
   }
-
 
   seDesconecto() {
     this.seDesconectoSubscription?.unsubscribe();
-    this.seDesconectoSubscription = this.socketWebService.onEvent('jugador-se-desconecto').subscribe(datos => {
-      //"El usuario se ha desconectao"
-      alert(datos.detalle);
-    });
+    this.seDesconectoSubscription = this.socketWebService
+      .onEvent('jugador-se-desconecto')
+      .subscribe((datos) => {
+        //"El usuario se ha desconectao"
+        alert(datos.detalle);
+      });
   }
-
 
   /*----------------------------------------------------------------------------------------
                              SOLICITAR EL JUEIGO 
@@ -467,40 +423,43 @@ export class JugadorContraJugadorPage implements OnInit {
   emitirJuego() {
     this.juegoSubscription?.unsubscribe(); // Limpieza de suscripción
 
-    this.juegoSubscription = this.socketWebService.onEvent('solicitar-juego').subscribe(data => {
-      console.log('------------solictar el juego:', data);
+    this.juegoSubscription = this.socketWebService
+      .onEvent('solicitar-juego')
+      .subscribe((data) => {
+        console.log('------------solictar el juego:', data);
 
-      localStorage.setItem("nombreJugador1", data.nombreJugador1);
-      localStorage.setItem("avatar1", data.urlAvatar1);
-      localStorage.setItem("nombreJugador2", data.nombreJugador2);
-      localStorage.setItem("avatarjugador2", data.urlAvatar2);
-      localStorage.setItem("ico1", data.Ico1);
-      localStorage.setItem("ico2", data.Ico2);
+        localStorage.setItem('nombreJugador1', data.nombreJugador1);
+        localStorage.setItem('avatar1', data.urlAvatar1);
+        localStorage.setItem('nombreJugador2', data.nombreJugador2);
+        localStorage.setItem('avatarjugador2', data.urlAvatar2);
+        localStorage.setItem('ico1', data.Ico1);
+        localStorage.setItem('ico2', data.Ico2);
 
-      this.leerDelStorage();
+        this.leerDelStorage();
 
+        setTimeout(() => {
+          if (data.turno == true) {
+            this.toggleText(
+              this.ocultarMsgManos,
+              'Juegas tú (abre dos tarjetas)',
+              true
+            );
+          } else {
+            this.toggleText(this.ocultarMsgManos, 'Espera  ', false);
+          }
+        }, 3000);
 
-      setTimeout(() => {
-        if (data.turno == true) {
-          this.toggleText(this.ocultarMsgManos, "Juegas tú (abre dos tarjetas)", true);
-        } else {
-          this.toggleText(this.ocultarMsgManos, "Espera  ", false);
-        }
-      }, 3000);
+        // Manejar la respuesta a la invitación aquí
+        this.recibirJuego(data);
 
-      // Manejar la respuesta a la invitación aquí
-      this.recibirJuego(data);
-
-      this.InicioElJuego = true;
-      this.swUnaSolaVezEspera = true;
-      this.servicioDeTemporizador.reiniciarTemporizadores();
-      this.startTimerA();
-      this.startTimerB();
-      this.stopTimerB();
-      this.displayTimeB = this.displayTimeA;
-
-    });
-
+        this.InicioElJuego = true;
+        this.swUnaSolaVezEspera = true;
+        this.servicioDeTemporizador.reiniciarTemporizadores();
+        this.startTimerA();
+        this.startTimerB();
+        this.stopTimerB();
+        this.displayTimeB = this.displayTimeA;
+      });
 
     // this.socketWebService.emitEvent('solicitar-juego', {
     //   jugador2: this.nombreJugador2,
@@ -509,60 +468,48 @@ export class JugadorContraJugadorPage implements OnInit {
 
     //   // Puedes añadir más datos necesarios para la invitación
     // });
-
-
   }
-
-
 
   /*----------------------------------------------------------------------------------------
                              SALIO DEL JUEGO 
   -----------------------------------------------------------------------------------------*/
   emitirSalidadDeJuego() {
     this.salioDelJuegoSubscription?.unsubscribe(); // Limpieza de suscripción
-    this.salioDelJuegoSubscription = this.socketWebService.onEvent('leave').subscribe(data => {
-    });
+    this.salioDelJuegoSubscription = this.socketWebService
+      .onEvent('leave')
+      .subscribe((data) => {});
 
     this.socketWebService.emitEvent('leave', {
       opc: 0,
       room: this.nombreSala,
       nombre: this.nombreJugador,
-
     });
   }
-
-
-
 
   /* -----------------------------------------------------------------------------------------------
                       RECIBIR ELJUEGO
    -----------------------------------------------------------------------------------------------*/
   recibirJuego(datos: any) {
-
     this.Ico1 = datos.Ico1;
     this.Ico2 = datos.Ico2;
 
-
-    console.log(" llego el juego ", datos);
+    console.log(' llego el juego ', datos);
     this.parejasHechas = [];
-    this.imgAvatarJugador1 = datos.urlAvatar1
-    this.imgAvatarJugador2 = datos.urlAvatar2
+    this.imgAvatarJugador1 = datos.urlAvatar1;
+    this.imgAvatarJugador2 = datos.urlAvatar2;
     this.miTurno = datos.turno;
     this.controlarTimer = true;
-
-
-
-
 
     this.nombreJugador1 = datos.nombreJugador1;
     this.nombreJugador2 = datos.nombreJugador2;
     this.nivel = datos.nivel;
-    this.rutaImagen = "url('../../../assets/icons-audios/nivel" + this.nivel + "/icons/";
+    this.rutaImagen =
+      "url('../../../assets/icons-audios/nivel" + this.nivel + '/icons/';
 
     this.listaTarjetas = datos.tarjetas.map((tarjeta: any) => ({
       nombre: tarjeta.nombre,
       significado: tarjeta.significado,
-      imagen: this.rutaImagen + tarjeta.nombre + ".png"
+      imagen: this.rutaImagen + tarjeta.nombre + '.png',
     }));
 
     // this.imprimirTablaConsole();
@@ -579,34 +526,19 @@ export class JugadorContraJugadorPage implements OnInit {
       this.rangoNumeros.push(i);
     }
 
-
     this.hideButton = new Array(this.listaTarjetas.length).fill(false);
     this.hideImage = new Array(this.listaTarjetas.length).fill(true); // Inicializa hideImage correctamente
 
     this.mostrarTurno(this.miTurno);
-
-
   }
-
-
-
-
-
-
-
-
 
   jugarmaquina() {
     //this.nivelBasico();
   }
 
-
-
-
   /* -------------------------------------------------
         NIVEL MAQUINA
 ----------------------------------------------------*/
-
 
   // async nivelBasico() {
   //   var pareja = this.encontrarPareja();
@@ -634,7 +566,9 @@ export class JugadorContraJugadorPage implements OnInit {
   //   }
   // }
 
-  seleccionarDosNumerosDiferentes(rangoNumeros: number[]): [number, number] | null {
+  seleccionarDosNumerosDiferentes(
+    rangoNumeros: number[]
+  ): [number, number] | null {
     // Selección aleatoria de dos números del rango
     const indice1 = Math.floor(Math.random() * rangoNumeros.length);
     let indice2 = Math.floor(Math.random() * rangoNumeros.length);
@@ -646,7 +580,6 @@ export class JugadorContraJugadorPage implements OnInit {
     // Devolvemos un arreglo con los dos números seleccionados
     return [rangoNumeros[indice1], rangoNumeros[indice2]];
   }
-
 
   /*-----------------------------------------------------------------------------------
                           HACER CLICK EN LAS CARTAS
@@ -669,7 +602,6 @@ export class JugadorContraJugadorPage implements OnInit {
   //   });
   // }
 
-
   //edgar
   // agregarBotones(boton: number, nombre: string) {
   //   // Verifica si el arreglo ya contiene un elemento con el mismo nombre y el mismo index
@@ -684,14 +616,11 @@ export class JugadorContraJugadorPage implements OnInit {
   //   }
   // }
 
-
-
-
   fadeButton(index: number) {
     this.hideButton[index] = true; //reproducir animacion
-    this.hideImage[index] = !this.ocultarBotones[index];  // Mostrar la imagen correspondiente al botón clicado true
+    this.hideImage[index] = !this.ocultarBotones[index]; // Mostrar la imagen correspondiente al botón clicado true
     setTimeout(() => {
-      this.fadeImage(index)
+      this.fadeImage(index);
     }, 500);
   }
 
@@ -701,19 +630,16 @@ export class JugadorContraJugadorPage implements OnInit {
     }
     this.hideImage[index] = false; // Mostrar la imagen correspondiente al botón clicado
 
-    this.imageTimeouts[index] = setTimeout(() => {
-    }, 600);
+    this.imageTimeouts[index] = setTimeout(() => {}, 600);
   }
-
 
   /* ----------------------------------------------------------------------------------
                           sonar el audio de las palabras
   ---------------------------------------------------------------------------------- */
 
   sonarAudio(splass: boolean, index: number) {
-
     if (splass) {
-      this.nombreArchivoAsonar = "../../assets/sonidos/splash.wav";
+      this.nombreArchivoAsonar = '../../assets/sonidos/splash.wav';
     } else {
       this.nombreArchivoAsonar = `assets/icons-audios/nivel${this.nivel}/audios/${this.listaTarjetas[index].nombre}.wav`;
     }
@@ -721,39 +647,41 @@ export class JugadorContraJugadorPage implements OnInit {
     var sound = new Howl({
       src: this.nombreArchivoAsonar,
       volume: 0.5,
-      onend: () => {
-      }
+      onend: () => {},
     });
-    sound.play()
+    sound.play();
   }
 
   /* ----------------------------------------------------------------------------------
                           validar si hizo pareja en
   ---------------------------------------------------------------------------------- */
   validarJuegoEnParejas(datos: any) {
-
     console.table(datos);
-
 
     if (datos.clics == 1) {
       this.ocultarBotones[0] = false; //oculta el boton
-      this.listaTarjetas[0].imagen = this.rutaImagen + datos.nombreImagenUno + ".png')"
+      this.listaTarjetas[0].imagen =
+        this.rutaImagen + datos.nombreImagenUno + ".png')";
       this.sonarAudio(false, datos.botonIndexUno);
       //   this.nombreImagen = datos.nombreImagenUno;
 
       this.ocultarBotones[datos.botonIndexUno] = true; //oculta el boton
-      this.image[datos.botonIndexUno] = this.rutaImagen + datos.nombreImagenUno + ".png"
-      this.listaTarjetas[datos.botonIndexUno].imagen = this.rutaImagen + datos.nombreImagenUno + ".png')"
+      this.image[datos.botonIndexUno] =
+        this.rutaImagen + datos.nombreImagenUno + '.png';
+      this.listaTarjetas[datos.botonIndexUno].imagen =
+        this.rutaImagen + datos.nombreImagenUno + ".png')";
       //  this.nombreImagen = datos.nombreImagenUno;
       this.fadeButton(datos.botonIndexUno);
-
     } else if (datos.clics == 2) {
       this.ocultarBotones[datos.botonIndexDos] = true; //oculta el boton
-      this.image[datos.botonIndexDos] = this.rutaImagen + datos.nombreImagenDos + ".png"
-      this.listaTarjetas[datos.botonIndexDos].imagen = this.rutaImagen + datos.nombreImagenDos + ".png')"
+      this.image[datos.botonIndexDos] =
+        this.rutaImagen + datos.nombreImagenDos + '.png';
+      this.listaTarjetas[datos.botonIndexDos].imagen =
+        this.rutaImagen + datos.nombreImagenDos + ".png')";
       this.nombreImagen = datos.nombreImagenDos;
       this.fadeButton(datos.botonIndexDos);
-      this.listaTarjetas[datos.botonIndexDos].imagen = this.rutaImagen + datos.nombreImagenDos + ".png')"
+      this.listaTarjetas[datos.botonIndexDos].imagen =
+        this.rutaImagen + datos.nombreImagenDos + ".png')";
       this.sonarAudio(false, datos.botonIndexDos);
       this.nombreImagen = datos.nombreImagenDos;
     }
@@ -773,7 +701,8 @@ export class JugadorContraJugadorPage implements OnInit {
         this.puntosA = datos.puntosA;
         this.puntosB = datos.puntosB;
 
-        if (datos.hizoPareja == false) { //no hizo parjea 
+        if (datos.hizoPareja == false) {
+          //no hizo parjea
           //edgar
           // this.agregarBotones(datos.botonIndexUno, datos.nombreImagenUno);
           // this.agregarBotones(datos.botonIndexDos, datos.nombreImagenDos);
@@ -784,8 +713,8 @@ export class JugadorContraJugadorPage implements OnInit {
           this.hideButton[datos.botonIndexDos] = false;
           this.hideImage[datos.botonIndexUno] = true;
           this.hideImage[datos.botonIndexDos] = true;
-
-        } else { //hizo pareja
+        } else {
+          //hizo pareja
           //edgar
           // //Eliminar la pareja encontrada
           // this.botonesAbierto = this.botonesAbierto.filter(boton => boton.index !== datos.botonIndexUno && boton.index !== datos.botonIndexDos);
@@ -794,7 +723,7 @@ export class JugadorContraJugadorPage implements OnInit {
           this.Ipos++;
           this.parejasHechas[this.Ipos] = datos.botonIndexDos;
           this.Ipos++;
-          this.sonidosdelJuego("HizoPareja.wav");
+          this.sonidosdelJuego('HizoPareja.wav');
           this.hideButton[datos.botonIndexUno] = true;
           this.hideButton[datos.botonIndexDos] = true;
           this.hideImage[datos.botonIndexUno] = true;
@@ -804,7 +733,6 @@ export class JugadorContraJugadorPage implements OnInit {
         }
 
         if (datos.juegoTerminado == true) {
-
           //   this.id = Number(localStorage.getItem('id'));
 
           // if (this.id >= 0 ){
@@ -812,26 +740,33 @@ export class JugadorContraJugadorPage implements OnInit {
 
           // }
 
-
           //Suponiendo que esto está dentro de algún método en un componente
-          this.finalizarJuego(this.nombreJugador1, datos.puntosA, this.nombreJugador2, datos.puntosB, datos.ico1,
-            datos.ico2, datos.socket1, datos.socket2, datos.sala, this.imgAvatarJugador1,
-            this.imgAvatarJugador2, datos.resultadofinal1, datos.resultadofinal2, 'jugadorContraJugador'
+          this.finalizarJuego(
+            this.nombreJugador1,
+            datos.puntosA,
+            this.nombreJugador2,
+            datos.puntosB,
+            datos.ico1,
+            datos.ico2,
+            datos.socket1,
+            datos.socket2,
+            datos.sala,
+            this.imgAvatarJugador1,
+            this.imgAvatarJugador2,
+            datos.resultadofinal1,
+            datos.resultadofinal2,
+            'jugadorContraJugador'
           );
-          localStorage.setItem("quienJuega", 'jugadorContraJugador');
+          localStorage.setItem('quienJuega', 'jugadorContraJugador');
           localStorage.setItem('sala', datos.sala);
-
-
-
         } else {
-
           if (this.controlarTimer == true) {
-            this.stopTimerA()
+            this.stopTimerA();
             this.resumeTimerB();
             this.controlarTimer = false;
           } else {
             this.controlarTimer = true;
-            this.stopTimerB()
+            this.stopTimerB();
             this.resumeTimerA();
           }
 
@@ -839,28 +774,20 @@ export class JugadorContraJugadorPage implements OnInit {
           if (this.miTurno === true) {
             if (datos.juegoTerminado == false) {
               // if (this.swUnaSolaVezEspera === true) {
-              this.toggleText(this.ocultarMsgManos, "Juegas tú", true);
+              this.toggleText(this.ocultarMsgManos, 'Juegas tú', true);
               this.swUnaSolaVezEspera = false;
               // }
               //this.paraSeguirCronometro(true);
-
             }
           } else {
             this.clicUsuario = 0;
             // if (this.swUnaSolaVezEspera === true) {
-            this.toggleText(this.ocultarMsgManos, "Espera", false);
+            this.toggleText(this.ocultarMsgManos, 'Espera', false);
             // }
           }
         }
       }
     }, 1000);
-
-
-
-
-
-
-
   }
 
   /* ---------------------------------------------------------------------------------------------
@@ -868,41 +795,38 @@ export class JugadorContraJugadorPage implements OnInit {
    ---------------------------------------------------------------------------------------------*/
   mostrarTurno(turno: boolean) {
     this.miTurno = turno;
-    console.log("mi turno", this.miTurno)
+    console.log('mi turno', this.miTurno);
     if (this.miTurno == false) {
       this.imagenes = ['../../assets/img/gif/dorsoTarjetas.png'];
     } else {
-      this.imagenes = ['../../assets/cards/Greekboton1.png',
+      this.imagenes = [
+        '../../assets/cards/Greekboton1.png',
         '../../assets/cards/Greekboton2.png',
         '../../assets/cards/Greekboton3.png',
       ];
     }
   }
-
 
   ensayo(index: number) {
     if (index == 1) {
       this.imagenes = ['../../assets/img/gif/dorsoTarjetas.png'];
     } else {
-      this.imagenes = ['../../assets/cards/Greekboton1.png',
+      this.imagenes = [
+        '../../assets/cards/Greekboton1.png',
         '../../assets/cards/Greekboton2.png',
         '../../assets/cards/Greekboton3.png',
       ];
-
     }
   }
 
-
-
-
-
   seleccionarDosNumeros = function (arr: any) {
     if (arr.length < 2) {
-      return null;  // No hay suficientes elementos para seleccionar dos
+      return null; // No hay suficientes elementos para seleccionar dos
     }
     let idx1 = Math.floor(Math.random() * arr.length);
     let idx2 = Math.floor(Math.random() * arr.length);
-    while (idx1 === idx2) {  // Asegura que no se seleccione el mismo índice dos veces
+    while (idx1 === idx2) {
+      // Asegura que no se seleccione el mismo índice dos veces
       idx2 = Math.floor(Math.random() * arr.length);
     }
     return [arr[idx1], arr[idx2]];
@@ -917,46 +841,35 @@ export class JugadorContraJugadorPage implements OnInit {
       }
     }
     this.imprimirTablaConsole();
-
   }
-
-
 
   /*-------------------------------------------------------------------------------------------- 
                              CUANDO ENTRA LA PANTALLA
     ------------------------------------------------------------------------------------------*/
 
-  ionViewWillEnter() {
-
-
-  }
-
-
-
+  ionViewWillEnter() {}
 
   /*-------------------------------------------------------------------------
                           CRONOMETRO
    --------------------------------------------------------------------------*/
   paraSeguirCronometro(opc: boolean) {
     if (opc === true) {
-      this.stopTimerA()
+      this.stopTimerA();
       this.startTimerB();
     } else {
-      this.stopTimerB()
-      this.resumeTimerA()
+      this.stopTimerB();
+      this.resumeTimerA();
     }
   }
 
-
   startTimerA(): void {
-
-
-    this.timerSubscription = this.servicioDeTemporizador.obtenerCuentaAtrasTimer1().subscribe(tiempo => {
-      this.displayTimeA = this.formatTime(tiempo);  // Usar la función de formato aquí
-    });
+    this.timerSubscription = this.servicioDeTemporizador
+      .obtenerCuentaAtrasTimer1()
+      .subscribe((tiempo) => {
+        this.displayTimeA = this.formatTime(tiempo); // Usar la función de formato aquí
+      });
     this.servicioDeTemporizador.iniciarCuentaAtrasTimer1();
   }
-
 
   stopTimerA(): void {
     this.servicioDeTemporizador.detenerTimer1();
@@ -970,9 +883,11 @@ export class JugadorContraJugadorPage implements OnInit {
                   segundo timer 
   ----------------------------------------------------------*/
   startTimerB(): void {
-    this.timerSubscription = this.servicioDeTemporizador.obtenerCuentaAtrasTimer2().subscribe(tiempo => {
-      this.displayTimeB = this.formatTime(tiempo);  // Usar la función de formato aquí
-    });
+    this.timerSubscription = this.servicioDeTemporizador
+      .obtenerCuentaAtrasTimer2()
+      .subscribe((tiempo) => {
+        this.displayTimeB = this.formatTime(tiempo); // Usar la función de formato aquí
+      });
     this.servicioDeTemporizador.iniciarCuentaAtrasTimer2();
   }
 
@@ -984,20 +899,18 @@ export class JugadorContraJugadorPage implements OnInit {
     this.servicioDeTemporizador.reanudarCuentaAtrasTimer2();
   }
 
-
-
-
   imprimirTablaConsole() {
-
     console.clear();
-    console.log('x1b[32m LISTA DE TARJETAS', 'color: fuchsia; font-weight: bold;');
+    console.log(
+      'x1b[32m LISTA DE TARJETAS',
+      'color: fuchsia; font-weight: bold;'
+    );
     console.table(this.listaTarjetas); // Para una vista tabular
     console.log('\x1b[36m  BOTONES ABIERTOS FRON END');
     console.table(this.botonesAbierto); // Para una vista tabular
 
     // console.log('\x1b[33m%s\x1b[0m', " ----------BOTONES ABIERTOD DEL BACKEN   ");
     // console.table(this.botonesAbiertoBackend);
-
   }
 
   encontrarPareja() {
@@ -1006,7 +919,7 @@ export class JugadorContraJugadorPage implements OnInit {
       if (visto[boton.nombre]) {
         return {
           primeraPareja: visto[boton.nombre],
-          segundaPareja: boton
+          segundaPareja: boton,
         };
       }
       visto[boton.nombre] = boton;
@@ -1014,23 +927,17 @@ export class JugadorContraJugadorPage implements OnInit {
     return null; // Si no hay ninguna pareja
   }
 
-
-
   sonidosdelJuego(nombreAudio: string) {
-
     var soundid = new Howl({
       //src: ['assets/icons-audios/nivel' + this.nivel + '/audios/' + this.listaTarjetas[index].nombre + '.wav'],
       src: ['assets/sonidos/' + nombreAudio],
       // src: ['assets/icons-audios/nivel1/audios/HizoPareja.wav'],
       volume: 1.9,
-      onend: () => {
-      }
+      onend: () => {},
     });
 
-    soundid.play()
+    soundid.play();
   }
-
-
 
   /*
       ----------------------------------------------------------------------------------------
@@ -1038,11 +945,22 @@ export class JugadorContraJugadorPage implements OnInit {
       -----------------------------------------------------------------------------------------
     */
 
-  finalizarJuego(jugador1: string, puntosA: number, jugador2: string, puntosB: number, iCo1: number, iCo2: number, socket1: string, socket2: string, sala: string
-    , urlAvatar1: string, urlAvatar2: string, resultadofinal: string, resultadofina2: string, pagina: string
-
+  finalizarJuego(
+    jugador1: string,
+    puntosA: number,
+    jugador2: string,
+    puntosB: number,
+    iCo1: number,
+    iCo2: number,
+    socket1: string,
+    socket2: string,
+    sala: string,
+    urlAvatar1: string,
+    urlAvatar2: string,
+    resultadofinal: string,
+    resultadofina2: string,
+    pagina: string
   ) {
-
     const resultado = {
       jugador1: {
         nombre: jugador1,
@@ -1063,24 +981,17 @@ export class JugadorContraJugadorPage implements OnInit {
         resultadofinal: resultadofina2,
       },
 
-      pagina: pagina
+      pagina: pagina,
     };
 
     // Guardar el resultado del juego
     this.guardarResultadosService.guardarResultados(resultado);
 
-
-
     // Navegar a la página de juego finalizado
     //  this.router.navigate(['/terminojuego']);
 
     this.navCtrl.navigateForward('/juego-terminado');
-
-
   }
-
-
-
 
   imagenHizoPareja() {
     // Ocultar la imagen después de 2 segundos
@@ -1088,7 +999,5 @@ export class JugadorContraJugadorPage implements OnInit {
     setTimeout(() => {
       this.showImage = false;
     }, 1200);
-
   }
-
 }

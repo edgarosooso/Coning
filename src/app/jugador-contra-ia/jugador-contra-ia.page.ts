@@ -5,7 +5,6 @@ ionViewWillLeave: Se activa cuando la página está a punto de dejar de ser la p
 ionViewDidLeave: Se dispara después de que la página ha dejado de ser visible.
 */
 
-
 import { Subscription } from 'rxjs';
 import { SocketWebService } from '../services/socket-web.service';
 import { Tarjeta } from '../../app/models/tarjeta.model';
@@ -16,17 +15,26 @@ import { ClickEventData } from '../models/click-event-data.model';
 import { GuardarResultadosService } from '../services/guardar-resultados.service';
 import { ServicioDeTemporizador } from '../services/timer.service.service';
 
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  HostListener,
+} from '@angular/core';
 import { ConexionesService } from '../services/conexiones.service';
 import { NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-jugador-contra-ia',
   templateUrl: './jugador-contra-ia.page.html',
-  styleUrls: ['./jugador-contra-ia.page.scss', './jugador-contra-ia.page2.scss'],
-
+  styleUrls: [
+    './jugador-contra-ia.page.scss',
+    './jugador-contra-ia.page1.scss',
+    './jugador-contra-ia.page2.scss',
+  ],
 })
 export class JugadorContraIaPage implements OnInit {
   private eventSubscription: Subscription | undefined;
@@ -39,8 +47,6 @@ export class JugadorContraIaPage implements OnInit {
   private clickSubscription: Subscription | undefined;
   private timerSubscription: Subscription | undefined;
   private salioDelJuegoSubscription: Subscription | undefined;
-
-
 
   nombreJugador: string = '';
   isLoading: boolean = true;
@@ -62,47 +68,41 @@ export class JugadorContraIaPage implements OnInit {
     private platform: Platform,
     private router: Router,
     private conexionesService: ConexionesService
-
-
-
-  ) { }
+  ) {}
 
   // src/app/some-page/some-page.component.ts
-  lista: any[] = [];  // Inicializando como un arreglo vacío
+  lista: any[] = []; // Inicializando como un arreglo vacío
 
   ionViewDidEnter() {
     //Se ejecuta cuando la página ha entrado completamente y ahora es la página activa.
 
+    this.nombreJugador1 = localStorage.getItem('Jugador1') || 'jugador1';
+    this.imgAvatarJugador1 =
+      localStorage.getItem('avatar1') ||
+      '../../assets/avatar/avatarPredeterminado.png';
+    this.nombreJugador2 = localStorage.getItem('nombreJugador2') || 'maquina';
+    this.imgAvatarJugador2 =
+      localStorage.getItem('avatarjugador2') || '../assets/avatar/avatarPc.gif';
+    this.imgAvatarConectado = localStorage.getItem('avatarConectado') || '';
 
-    this.nombreJugador1 = localStorage.getItem("Jugador1") || "jugador1";
-    this.imgAvatarJugador1 = localStorage.getItem("avatar1") || '../../assets/avatar/avatarPredeterminado.png';
-    this.nombreJugador2 = localStorage.getItem("nombreJugador2") || "maquina";
-    this.imgAvatarJugador2 = localStorage.getItem("avatarjugador2") || "../assets/avatar/avatarPc.gif";
-    this.imgAvatarConectado = localStorage.getItem("avatarConectado") || "";
-
-    this.idTabla = Number(localStorage.getItem("id")) || -1;
-    this.icoTabla = Number(localStorage.getItem("icoTabla")) || 70;
+    this.idTabla = Number(localStorage.getItem('id')) || -1;
+    this.icoTabla = Number(localStorage.getItem('icoTabla')) || 70;
 
     this.ocultarMsgManos = this.getBooleanFromLocalStorage('viewHands');
 
-
-    this.Ico2 = 3700
+    this.Ico2 = 3700;
 
     this.Ico1 = this.icoTabla;
 
     this.enviar();
-
   }
-
 
   getBooleanFromLocalStorage(key: string): boolean {
     const value = localStorage.getItem(key);
     return value === 'true';
   }
 
-
   ngOnInit() {
-
     this.lista = this.getListaInicial(); // Supón que tienes una función para obtener los datos iniciales
     console.log(this.lista);
     this.sonarAudio(true, 0);
@@ -111,34 +111,36 @@ export class JugadorContraIaPage implements OnInit {
       this.isLoading = false;
     }, 2100);
 
-    this.bgcolor = "#28ba62";
+    this.bgcolor = '#28ba62';
     this.bBloqueado = 0;
     this.nombreJugador = 'jugador';
 
     this.imprimirTablaConsole();
 
-
     if (this.InicioElJuego == true) {
-      this.servicioDeTemporizador.verificarTemporizador1AlCero().subscribe(alCero => {
-        if (alCero) {
-          // Acción cuando el temporizador 1 llega a cero
-          alert('jugador ' + this.nombreJugador1 + '  ha perdido por tiempo');
-          this.servicioDeTemporizador.detenerTimer1()
-          this.servicioDeTemporizador.detenerTimer2()
-          //doka
-        }
-      });
+      this.servicioDeTemporizador
+        .verificarTemporizador1AlCero()
+        .subscribe((alCero) => {
+          if (alCero) {
+            // Acción cuando el temporizador 1 llega a cero
+            alert('jugador ' + this.nombreJugador1 + '  ha perdido por tiempo');
+            this.servicioDeTemporizador.detenerTimer1();
+            this.servicioDeTemporizador.detenerTimer2();
+            //doka
+          }
+        });
 
-      this.servicioDeTemporizador.verificarTemporizador2AlCero().subscribe(alCero => {
-        if (alCero) {
-          // Acción cuando el temporizador 2 llega a cero
-          alert('jugador ' + this.nombreJugador2 + '  ha perdido por tiempo');
-          this.servicioDeTemporizador.detenerTimer1()
-          this.servicioDeTemporizador.detenerTimer2()
-        }
-      });
+      this.servicioDeTemporizador
+        .verificarTemporizador2AlCero()
+        .subscribe((alCero) => {
+          if (alCero) {
+            // Acción cuando el temporizador 2 llega a cero
+            alert('jugador ' + this.nombreJugador2 + '  ha perdido por tiempo');
+            this.servicioDeTemporizador.detenerTimer1();
+            this.servicioDeTemporizador.detenerTimer2();
+          }
+        });
     }
-
 
     const viewHandsString: string | null = localStorage.getItem('viewHands');
 
@@ -150,12 +152,9 @@ export class JugadorContraIaPage implements OnInit {
       this.ocultarMsgManos = true;
     }
 
-
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.regresar();
     });
-
-
   }
 
   @HostListener('window:popstate', ['$event'])
@@ -175,16 +174,14 @@ export class JugadorContraIaPage implements OnInit {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-
   listaTarjetas: Tarjeta[] = []; // Usando la interfaz Tarjeta
   InicioElJuego: boolean = false;
   swUnaSolaVezEspera: boolean = true;
   nombreSala: string = '';
 
-
   ocultarMsgManos: boolean = true;
-  displayTimeA = '';  // tiempo inicial formateado
-  displayTimeB = this.displayTimeA;  // tiempo inicial formateado
+  displayTimeA = ''; // tiempo inicial formateado
+  displayTimeB = this.displayTimeA; // tiempo inicial formateado
   veces: number = 0;
 
   countdownSubscription: Subscription | undefined;
@@ -193,20 +190,20 @@ export class JugadorContraIaPage implements OnInit {
 
   timeoutRef: any;
 
-
   showText = false;
 
   mensajeSistema = 'Texto inicial';
-  manoUrl = "../../assets/img/manos/sigues.png";
+  manoUrl = '../../assets/img/manos/sigues.png';
 
-  imagenes = ['../../assets/cards/Greekboton1.png',
+  imagenes = [
+    '../../assets/cards/Greekboton1.png',
     '../../assets/cards/Greekboton2.png',
     '../../assets/cards/Greekboton3.png',
   ];
   showImage: boolean = false;
 
   nombreJugador1: string = '';
-  nombreArchivoAsonar: string = ''
+  nombreArchivoAsonar: string = '';
   rangoNumeros: number[] = [];
   miTurno: boolean = false;
   //condicion: boolean = true; // Por ejemplo, inicia con valor true
@@ -217,7 +214,6 @@ export class JugadorContraIaPage implements OnInit {
   jugandoMaquina: boolean = false;
   juegaHumano: boolean = true;
   socketUsuario: string = '';
-
 
   botonesAbierto: any[] = [];
   botonesAbiertoBackend: any[] = [];
@@ -231,7 +227,7 @@ export class JugadorContraIaPage implements OnInit {
   hideButton: boolean[] = [];
   hideImage: boolean[] = []; // Inicializa hideImage como un array vacío
   imageTimeouts: any[] = []; // Array para almacenar los identificadores de temporizador
-  image: any[] = []
+  image: any[] = [];
   //turno: boolean;
   hora: string = '';
   nivel: number = 0;
@@ -248,24 +244,22 @@ export class JugadorContraIaPage implements OnInit {
   swJugadorInicia: number = 0;
   timerID: any;
   nombreJugador2: string = '';
-  nombreJugador_2: string = ''
-  rutaImagen: string = ''
-  sSocket: string = ''
-  numeroJugadores: string = ''
-  bgcolor: string = ''
+  nombreJugador_2: string = '';
+  rutaImagen: string = '';
+  sSocket: string = '';
+  numeroJugadores: string = '';
+  bgcolor: string = '';
   bBloqueado: number = 0;
   totalNiveles: number = 0;
-  nombreArchivo: string = ''
+  nombreArchivo: string = '';
   imgAvatarJugador1: string = '';
   imgAvatarJugador2: string = '';
   nombreImagen: string = '';
   nombreImagenDos: string = '';
   indensayo: number = 1;
 
-  imgMatch: string = "../../assets/img/gif/Match.gif";
+  imgMatch: string = '../../assets/img/gif/Match.gif';
   //showImage: boolean = true;
-
-
 
   /* --------------------------------------------------------------------------------------------------
                       RECIBIR INFORMACION DEL BACKEND
@@ -281,9 +275,8 @@ export class JugadorContraIaPage implements OnInit {
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
-    this.servicioDeTemporizador.detenerTimer1()
-    this.servicioDeTemporizador.detenerTimer2()
-
+    this.servicioDeTemporizador.detenerTimer1();
+    this.servicioDeTemporizador.detenerTimer2();
   }
 
   // Se ejecuta justo antes de que la página comience a dejar de ser visible
@@ -291,29 +284,23 @@ export class JugadorContraIaPage implements OnInit {
     console.log('Estoy dejando la página...');
 
     this.emitirSalidadDeJuego();
-
   }
-
 
   ocultarManos() {
-    this.conexionesService.UpdateViewAvisoById(this.idTabla).subscribe(datos => {
-      localStorage.setItem('viewHands', 'false')
-      this.ocultarMsgManos = false;
-    })
-
+    this.conexionesService
+      .UpdateViewAvisoById(this.idTabla)
+      .subscribe((datos) => {
+        localStorage.setItem('viewHands', 'false');
+        this.ocultarMsgManos = false;
+      });
   }
-
-
-
-
-
 
   /* ----------------------------------------------------------------------------------
                             validar click del boton
   ---------------------------------------------------------------------------------- */
   hizoClickBotones(usuario: boolean, botonNumero: number, nombre: string) {
-
-    if (usuario == true) { //jugando usuario
+    if (usuario == true) {
+      //jugando usuario
       if (this.hideImage[botonNumero] && this.hideButton[botonNumero]) {
         return; // Detener la ejecución de la función aquí
       }
@@ -324,33 +311,31 @@ export class JugadorContraIaPage implements OnInit {
       }
     }
 
-    this.sonidosdelJuego("Boton.wav");
+    this.sonidosdelJuego('Boton.wav');
 
     this.ocultarBotones[botonNumero] = true;
-    this.image[botonNumero] = this.rutaImagen + nombre + ".png"
+    this.image[botonNumero] = this.rutaImagen + nombre + '.png';
 
-    this.listaTarjetas[botonNumero].imagen = this.rutaImagen + nombre + ".png')"
+    this.listaTarjetas[botonNumero].imagen =
+      this.rutaImagen + nombre + ".png')";
 
-    this.fadeButton(botonNumero)
+    this.fadeButton(botonNumero);
 
-
-    this.enviarClick(botonNumero, nombre)
-
+    this.enviarClick(botonNumero, nombre);
   }
-
 
   toggleText(valor: boolean, texto: string, pareSigua: boolean) {
     this.showText = valor;
     this.mensajeSistema = texto;
     if (pareSigua === true) {
-      this.manoUrl = "../../assets/img/manos/sigues.png";
-      this.imagenes = ['../../assets/cards/Greekboton1.png',
+      this.manoUrl = '../../assets/img/manos/sigues.png';
+      this.imagenes = [
+        '../../assets/cards/Greekboton1.png',
         '../../assets/cards/Greekboton2.png',
         '../../assets/cards/Greekboton3.png',
       ];
-
     } else {
-      this.manoUrl = "../../assets/img/manos/espera.png";
+      this.manoUrl = '../../assets/img/manos/espera.png';
       this.imagenes = ['../../assets/img/gif/dorsoTarjetas.png'];
     }
     setTimeout(() => {
@@ -358,8 +343,6 @@ export class JugadorContraIaPage implements OnInit {
       this.showText = false;
     }, 1000);
   }
-
-
 
   manejarSeleccion() {
     const resultado = this.seleccionService.seleccionarDosNumeros(this.lista);
@@ -371,32 +354,24 @@ export class JugadorContraIaPage implements OnInit {
     return [0, 1, 2, 3]; // Tu lógica para obtener la lista
   }
 
-
-
-
-
-
-
-
-
-
-
   /*----------------------------------------------------------------------------------------
                                 ENVIAR INGRESO
   -----------------------------------------------------------------------------------------*/
   enviar() {
     this.ingresoSubscription?.unsubscribe(); // Desuscribirse de cualquier suscripción anterior
 
-    this.ingresoSubscription = this.socketWebService.onEvent('ingreso').subscribe(datos => {
-      console.log('Respuesta del servidor al ingreso:', datos);
-      //this.imgAvatarConectado = datos.rutaAvatar;
-      localStorage.setItem('jugador1', this.usuario);
-      //      localStorage.setItem('Jugador1-rutaAvatar', datos.rutaAvatar);  
-      localStorage.setItem('Jugador1-rutaAvatar', this.imgAvatarConectado);
-      localStorage.setItem('Jugador1-socket', datos.socket);
-      // Aquí podrías llamar a otra función que maneje la lógica después del ingreso
-      this.emitirInvitacion();
-    });
+    this.ingresoSubscription = this.socketWebService
+      .onEvent('ingreso')
+      .subscribe((datos) => {
+        console.log('Respuesta del servidor al ingreso:', datos);
+        //this.imgAvatarConectado = datos.rutaAvatar;
+        localStorage.setItem('jugador1', this.usuario);
+        //      localStorage.setItem('Jugador1-rutaAvatar', datos.rutaAvatar);
+        localStorage.setItem('Jugador1-rutaAvatar', this.imgAvatarConectado);
+        localStorage.setItem('Jugador1-socket', datos.socket);
+        // Aquí podrías llamar a otra función que maneje la lógica después del ingreso
+        this.emitirInvitacion();
+      });
 
     this.socketWebService.emitEvent('ingreso', {
       sala: this.nombreSala,
@@ -404,19 +379,19 @@ export class JugadorContraIaPage implements OnInit {
     });
   }
 
-
   /*----------------------------------------------------------------------------------------
                               ENVIAR INVITACION A JUGAR
   -----------------------------------------------------------------------------------------*/
   emitirInvitacion() {
     this.invitacionSubscription?.unsubscribe(); // Limpieza de suscripción
-    this.invitacionSubscription = this.socketWebService.onEvent('invitar-A-jugar').subscribe(data => {
-      console.log('--------------------   invitar a jugar:', data);
-      this.emitirJuego(data.sala);
-      this.nombreSala = data.sala;
-      this.imprimirTablaConsole();
-
-    });
+    this.invitacionSubscription = this.socketWebService
+      .onEvent('invitar-A-jugar')
+      .subscribe((data) => {
+        console.log('--------------------   invitar a jugar:', data);
+        this.emitirJuego(data.sala);
+        this.nombreSala = data.sala;
+        this.imprimirTablaConsole();
+      });
 
     this.socketWebService.emitEvent('invitar-A-jugar', {
       jugador: this.nombreJugador1.trim(),
@@ -428,25 +403,22 @@ export class JugadorContraIaPage implements OnInit {
     });
   }
 
-
-
   /*----------------------------------------------------------------------------------------
                               ENVIAR CLICK
   -----------------------------------------------------------------------------------------*/
   enviarClick(botonNumero: number, nombre: string) {
     this.clickSubscription?.unsubscribe(); // Limpieza de suscripción
-    this.clickSubscription = this.socketWebService.onEvent('click').subscribe(datosClick => {
+    this.clickSubscription = this.socketWebService
+      .onEvent('click')
+      .subscribe((datosClick) => {
+        this.botonesAbierto = datosClick.botonesAbiertos;
 
+        console.log(datosClick);
 
-      this.botonesAbierto = datosClick.botonesAbiertos;
-
-      console.log(datosClick)
-
-      this.validarJuegoEnParejas(datosClick);
-      //this.validarJuegoEnParejas(data);
-      this.imprimirTablaConsole();
-
-    });
+        this.validarJuegoEnParejas(datosClick);
+        //this.validarJuegoEnParejas(data);
+        this.imprimirTablaConsole();
+      });
 
     this.socketWebService.emitEvent('click', {
       botonIndex: botonNumero,
@@ -459,34 +431,35 @@ export class JugadorContraIaPage implements OnInit {
     });
   }
 
-
   /*----------------------------------------------------------------------------------------
                              SOLICITAR EL JUEIGO 
   -----------------------------------------------------------------------------------------*/
   emitirJuego(sala: string) {
     this.juegoSubscription?.unsubscribe(); // Limpieza de suscripción
 
-    this.juegoSubscription = this.socketWebService.onEvent('solicitar-juego').subscribe(data => {
-      console.log('------------solictar el juego:', data);
-      // Manejar la respuesta a la invitación aquí
-      this.recibirJuego(data);
+    this.juegoSubscription = this.socketWebService
+      .onEvent('solicitar-juego')
+      .subscribe((data) => {
+        console.log('------------solictar el juego:', data);
+        // Manejar la respuesta a la invitación aquí
+        this.recibirJuego(data);
 
+        setTimeout(() => {
+          if (data.turno == true) {
+            this.toggleText(
+              this.ocultarMsgManos,
+              'Juegas tú (abre dos tarjetas)',
+              true
+            );
+          }
+        }, 3000);
 
-      setTimeout(() => {
-        if (data.turno == true) {
-          this.toggleText(this.ocultarMsgManos, "Juegas tú (abre dos tarjetas)", true);
-        }
-      }, 3000);
-
-
-      this.InicioElJuego = true;
-      this.swUnaSolaVezEspera = true;
-      this.servicioDeTemporizador.reiniciarTemporizadores();
-      this.startTimerA();
-      this.displayTimeB = this.displayTimeA;
-
-    });
-
+        this.InicioElJuego = true;
+        this.swUnaSolaVezEspera = true;
+        this.servicioDeTemporizador.reiniciarTemporizadores();
+        this.startTimerA();
+        this.displayTimeB = this.displayTimeA;
+      });
 
     this.socketWebService.emitEvent('solicitar-juego', {
       jugador2: this.nombreJugador2,
@@ -497,35 +470,23 @@ export class JugadorContraIaPage implements OnInit {
 
       // Puedes añadir más datos necesarios para la invitación
     });
-
-
   }
-
-
 
   /*----------------------------------------------------------------------------------------
                              SALIO DEL JUEGO 
   -----------------------------------------------------------------------------------------*/
   emitirSalidadDeJuego() {
     this.salioDelJuegoSubscription?.unsubscribe(); // Limpieza de suscripción
-    this.salioDelJuegoSubscription = this.socketWebService.onEvent('salio-De-Juego').subscribe(data => {
-    });
+    this.salioDelJuegoSubscription = this.socketWebService
+      .onEvent('salio-De-Juego')
+      .subscribe((data) => {});
 
-    this.socketWebService.emitEvent('salio-De-Juego', {
-    });
+    this.socketWebService.emitEvent('salio-De-Juego', {});
   }
 
-
-
-
-
-
-
-
   recibirJuego(datos: any) {
-
     //this.imprimirTablaConsole()
-    console.log(" llego el juego ", datos);
+    console.log(' llego el juego ', datos);
     //  this.limpiarValores()
 
     this.parejasHechas = [];
@@ -535,35 +496,28 @@ export class JugadorContraIaPage implements OnInit {
 
     this.Ico1 = datos.Ico1;
     //nooothis.Ico2 = datos.Ico2;
-    this.imgAvatarJugador1 = datos.urlAvatar1
-    this.imgAvatarJugador2 = datos.urlAvatar2
+    this.imgAvatarJugador1 = datos.urlAvatar1;
+    this.imgAvatarJugador2 = datos.urlAvatar2;
     this.miTurno = datos.turno;
     this.nombreJugador1 = datos.nombreJugador1;
     this.nombreJugador2 = datos.nombreJugador2;
     this.nivel = datos.nivel;
-    this.rutaImagen = "url('../../../assets/icons-audios/nivel" + this.nivel + "/icons/";
-
+    this.rutaImagen =
+      "url('../../../assets/icons-audios/nivel" + this.nivel + '/icons/';
 
     // this.listaTarjetas = [];
     // this.listaTarjetas = datos.tarjetas;
 
-
     this.listaTarjetas = datos.tarjetas.map((tarjeta: any) => ({
       nombre: tarjeta.nombre,
       significado: tarjeta.significado,
-      imagen: this.rutaImagen + tarjeta.nombre + ".png"
+      imagen: this.rutaImagen + tarjeta.nombre + '.png',
     }));
-
-
-
-
 
     // this.imprimirTablaConsole();
 
-
     this.nombreSala = datos.sala;
     this.hora = datos.hora;
-
 
     for (var i = 0; i < this.listaTarjetas.length; i++) {
       this.ocultarBotones[i] = true;
@@ -577,70 +531,71 @@ export class JugadorContraIaPage implements OnInit {
       this.rangoNumeros.push(i);
     }
 
-
     this.hideButton = new Array(this.listaTarjetas.length).fill(false);
     this.hideImage = new Array(this.listaTarjetas.length).fill(true); // Inicializa hideImage correctamente
-
   }
-
-
-
-
 
   /* -------------------------------------------------
         NIVEL MAQUINA
 ----------------------------------------------------*/
 
-
   async nivelBasico() {
     var pareja = this.encontrarPareja();
     if (pareja) {
-
-
       // if(pareja.primeraPareja.index ===  pareja.segundaPareja.index)  {
       //   this.nivelBasico();
       // }
 
       //console.log(`Pareja encontrada: Indices ${pareja.primeraPareja.index} y ${pareja.segundaPareja.index}, Nombre: ${pareja.primeraPareja.nombre}`);
-      await this.secuenciaCartas(pareja.primeraPareja.index, pareja.primeraPareja.nombre)
+      await this.secuenciaCartas(
+        pareja.primeraPareja.index,
+        pareja.primeraPareja.nombre
+      );
 
-      await this.secuenciaCartas(pareja.segundaPareja.index, pareja.primeraPareja.nombre)
+      await this.secuenciaCartas(
+        pareja.segundaPareja.index,
+        pareja.primeraPareja.nombre
+      );
     } else {
-
       //manda un randomize donde las parejas no esten hechas
       this.jugandoMaquina = true;
       this.nombreImagenDos = this.nombreImagen;
 
       if (this.rangoNumeros.length > 1) {
-
         let numerosSeleccionados;
         do {
-          numerosSeleccionados = this.seleccionarDosNumerosDiferentes([...this.rangoNumeros]);
+          numerosSeleccionados = this.seleccionarDosNumerosDiferentes([
+            ...this.rangoNumeros,
+          ]);
         } while (!numerosSeleccionados);
 
-        this.datosDoka=   numerosSeleccionados[0] + ' ' + numerosSeleccionados[1]
+        this.datosDoka =
+          numerosSeleccionados[0] + ' ' + numerosSeleccionados[1];
 
         // if (numerosSeleccionados[0] === numerosSeleccionados[1]) {
         //   this.nivelBasico()
         // }
-   
-        await this.secuenciaCartas(numerosSeleccionados[0], this.listaTarjetas[numerosSeleccionados[0]].nombre);
-    
-        await this.secuenciaCartas(numerosSeleccionados[1], this.listaTarjetas[numerosSeleccionados[1]].nombre);
-        
+
+        await this.secuenciaCartas(
+          numerosSeleccionados[0],
+          this.listaTarjetas[numerosSeleccionados[0]].nombre
+        );
+
+        await this.secuenciaCartas(
+          numerosSeleccionados[1],
+          this.listaTarjetas[numerosSeleccionados[1]].nombre
+        );
       }
     }
   }
-  
- 
-  
+
   encontrarPareja() {
     const visto: { [key: string]: any } = {};
     for (let boton of this.botonesAbierto) {
       if (visto[boton.nombre]) {
         return {
           primeraPareja: visto[boton.nombre],
-          segundaPareja: boton
+          segundaPareja: boton,
         };
       }
       visto[boton.nombre] = boton;
@@ -648,7 +603,9 @@ export class JugadorContraIaPage implements OnInit {
     return null; // Si no hay ninguna pareja
   }
 
-  seleccionarDosNumerosDiferentes(rangoNumeros: number[]): [number, number] | null {
+  seleccionarDosNumerosDiferentes(
+    rangoNumeros: number[]
+  ): [number, number] | null {
     // Selección aleatoria de dos números del rango
     const indice1 = Math.floor(Math.random() * rangoNumeros.length);
     let indice2 = Math.floor(Math.random() * rangoNumeros.length);
@@ -661,13 +618,11 @@ export class JugadorContraIaPage implements OnInit {
     return [rangoNumeros[indice1], rangoNumeros[indice2]];
   }
 
-
   /*-----------------------------------------------------------------------------------
                           HACER CLICK EN LAS CARTAS
   -----------------------------------------------------------------------------------*/
   async secuenciaCartas(index: number, nombre: string) {
     await this.clickearCarta(index, nombre);
-
   }
 
   /*-----------------------------------------------------------------------------------------------
@@ -675,14 +630,13 @@ export class JugadorContraIaPage implements OnInit {
   ------------------------------------------------------------------------------------------------*/
   // Ejemplo de función en un componente de Ionic/Angular
   clickearCarta(index: number, nombre: string): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.timeoutRef = setTimeout(() => {
         this.hizoClickBotones(false, index, nombre);
         resolve();
       }, 1000);
     });
   }
-
 
   //edgar
   // agregarBotones(boton: number, nombre: string) {
@@ -698,14 +652,11 @@ export class JugadorContraIaPage implements OnInit {
   //   }
   // }
 
-
-
-
   fadeButton(index: number) {
     this.hideButton[index] = true; //reproducir animacion
-    this.hideImage[index] = !this.ocultarBotones[index];  // Mostrar la imagen correspondiente al botón clicado true
+    this.hideImage[index] = !this.ocultarBotones[index]; // Mostrar la imagen correspondiente al botón clicado true
     setTimeout(() => {
-      this.fadeImage(index)
+      this.fadeImage(index);
     }, 500);
   }
 
@@ -715,32 +666,27 @@ export class JugadorContraIaPage implements OnInit {
     }
     this.hideImage[index] = false; // Mostrar la imagen correspondiente al botón clicado
 
-    this.imageTimeouts[index] = setTimeout(() => {
-    }, 800);
+    this.imageTimeouts[index] = setTimeout(() => {}, 800);
   }
-
 
   /* ----------------------------------------------------------------------------------
                           sonar el audio de las palabras
   ---------------------------------------------------------------------------------- */
 
   sonarAudio(splass: boolean, index: number) {
-
     if (splass) {
-      this.nombreArchivoAsonar = "../../assets/sonidos/splash.wav";
+      this.nombreArchivoAsonar = '../../assets/sonidos/splash.wav';
     } else {
       this.nombreArchivoAsonar = `assets/icons-audios/nivel${this.nivel}/audios/${this.listaTarjetas[index].nombre}.wav`;
     }
-
 
     //alert(this.nombreArchivoAsonar)
     var sound = new Howl({
       src: this.nombreArchivoAsonar,
       volume: 0.5,
-      onend: () => {
-      }
+      onend: () => {},
     });
-    sound.play()
+    sound.play();
   }
 
   /* ----------------------------------------------------------------------------------
@@ -748,27 +694,30 @@ export class JugadorContraIaPage implements OnInit {
   ---------------------------------------------------------------------------------- */
 
   validarJuegoEnParejas(datos: any) {
-
     if (datos.clics == 1) {
-
       this.ocultarBotones[0] = false; //oculta el boton
-      this.listaTarjetas[0].imagen = this.rutaImagen + datos.nombreImagenUno + ".png')"
+      this.listaTarjetas[0].imagen =
+        this.rutaImagen + datos.nombreImagenUno + ".png')";
       this.sonarAudio(false, datos.botonIndexUno);
       //   this.nombreImagen = datos.nombreImagenUno;
 
       this.ocultarBotones[datos.botonIndexUno] = true; //oculta el boton
-      this.image[datos.botonIndexUno] = this.rutaImagen + datos.nombreImagenUno + ".png"
-      this.listaTarjetas[datos.botonIndexUno].imagen = this.rutaImagen + datos.nombreImagenUno + ".png')"
+      this.image[datos.botonIndexUno] =
+        this.rutaImagen + datos.nombreImagenUno + '.png';
+      this.listaTarjetas[datos.botonIndexUno].imagen =
+        this.rutaImagen + datos.nombreImagenUno + ".png')";
       //  this.nombreImagen = datos.nombreImagenUno;
       this.fadeButton(datos.botonIndexUno);
-
     } else if (datos.clics == 2) {
       this.ocultarBotones[datos.botonIndexDos] = true; //oculta el boton
-      this.image[datos.botonIndexDos] = this.rutaImagen + datos.nombreImagenDos + ".png"
-      this.listaTarjetas[datos.botonIndexDos].imagen = this.rutaImagen + datos.nombreImagenDos + ".png')"
+      this.image[datos.botonIndexDos] =
+        this.rutaImagen + datos.nombreImagenDos + '.png';
+      this.listaTarjetas[datos.botonIndexDos].imagen =
+        this.rutaImagen + datos.nombreImagenDos + ".png')";
       this.nombreImagen = datos.nombreImagenDos;
       this.fadeButton(datos.botonIndexDos);
-      this.listaTarjetas[datos.botonIndexDos].imagen = this.rutaImagen + datos.nombreImagenDos + ".png')"
+      this.listaTarjetas[datos.botonIndexDos].imagen =
+        this.rutaImagen + datos.nombreImagenDos + ".png')";
       this.sonarAudio(false, datos.botonIndexDos);
       this.nombreImagen = datos.nombreImagenDos;
     }
@@ -779,7 +728,6 @@ export class JugadorContraIaPage implements OnInit {
       // Aquí colocas la lógica que deseas ejecutar después de la pausa
       //console.log("Pasaron 2 segundos. Continuando con la lógica...");
       if (datos.clics == 2) {
-
         this.listaTarjetas[datos.botonIndexUno].imagen = '';
         this.listaTarjetas[datos.botonIndexDos].imagen = '';
 
@@ -787,7 +735,8 @@ export class JugadorContraIaPage implements OnInit {
         this.puntosA = datos.puntosA;
         this.puntosB = datos.puntosB;
 
-        if (datos.hizoPareja == false) { //no hizo parjea 
+        if (datos.hizoPareja == false) {
+          //no hizo parjea
           //edgar
           // this.agregarBotones(datos.botonIndexUno, datos.nombreImagenUno);
           // this.agregarBotones(datos.botonIndexDos, datos.nombreImagenDos);
@@ -798,48 +747,52 @@ export class JugadorContraIaPage implements OnInit {
           this.hideButton[datos.botonIndexDos] = false;
           this.hideImage[datos.botonIndexUno] = true;
           this.hideImage[datos.botonIndexDos] = true;
-
-        } else { //hizo pareja
+        } else {
+          //hizo pareja
           //edgar
           // //Eliminar la pareja encontrada
           // this.botonesAbierto = this.botonesAbierto.filter(boton => boton.index !== datos.botonIndexUno && boton.index !== datos.botonIndexDos);
 
           this.imagenHizoPareja();
-          
 
           this.parejasHechas[this.Ipos] = datos.botonIndexUno;
           this.Ipos++;
           this.parejasHechas[this.Ipos] = datos.botonIndexDos;
           this.Ipos++;
-          this.sonidosdelJuego("HizoPareja.wav");
+          this.sonidosdelJuego('HizoPareja.wav');
           this.hideButton[datos.botonIndexUno] = true;
           this.hideButton[datos.botonIndexDos] = true;
           this.hideImage[datos.botonIndexUno] = true;
           this.hideImage[datos.botonIndexDos] = true;
 
           this.eliminarParejaPorValor(datos.botonIndexUno, datos.botonIndexDos);
-
         }
-
 
         //  this.juegoTerminado = datos.juegoTerminado;
         if (datos.juegoTerminado == true) {
-          this.finalizarJuego(datos.nombreJugadorA, datos.puntosA, datos.nombreJugadorB, datos.puntosB, datos.ico1,
-            datos.ico2, datos.socket1, datos.socket2, datos.sala, this.imgAvatarJugador1,
-            this.imgAvatarJugador2, datos.resultadofinal1, datos.resultadofinal2, 'jugadorIa'
+          this.finalizarJuego(
+            datos.nombreJugadorA,
+            datos.puntosA,
+            datos.nombreJugadorB,
+            datos.puntosB,
+            datos.ico1,
+            datos.ico2,
+            datos.socket1,
+            datos.socket2,
+            datos.sala,
+            this.imgAvatarJugador1,
+            this.imgAvatarJugador2,
+            datos.resultadofinal1,
+            datos.resultadofinal2,
+            'jugadorIa'
           );
 
-          localStorage.setItem("quienJuega", 'jugadorIa');
+          localStorage.setItem('quienJuega', 'jugadorIa');
           localStorage.setItem('sala', datos.sala);
-
-
-
-
         } else {
-
           if (datos.turno !== true) {
             //this.ensayo(1);
-            this.toggleText(this.ocultarMsgManos, "Espera", false);
+            this.toggleText(this.ocultarMsgManos, 'Espera', false);
             if (datos.juegoTerminado == false) {
               // if (this.swUnaSolaVezEspera === true) {
               //  this.swUnaSolaVezEspera = false;
@@ -849,7 +802,7 @@ export class JugadorContraIaPage implements OnInit {
             }
           } else {
             //this.ensayo(2);
-            this.toggleText(this.ocultarMsgManos, "Juegas tú", true);
+            this.toggleText(this.ocultarMsgManos, 'Juegas tú', true);
             this.clicUsuario = 0;
             // if(  this.swUnaSolaVezEspera === true )  {
             //   this.toggleText(true, "Juegas tú", true);
@@ -861,14 +814,14 @@ export class JugadorContraIaPage implements OnInit {
     }, 1000);
   }
 
-
   seleccionarDosNumeros = function (arr: any) {
     if (arr.length < 2) {
-      return null;  // No hay suficientes elementos para seleccionar dos
+      return null; // No hay suficientes elementos para seleccionar dos
     }
     let idx1 = Math.floor(Math.random() * arr.length);
     let idx2 = Math.floor(Math.random() * arr.length);
-    while (idx1 === idx2) {  // Asegura que no se seleccione el mismo índice dos veces
+    while (idx1 === idx2) {
+      // Asegura que no se seleccione el mismo índice dos veces
       idx2 = Math.floor(Math.random() * arr.length);
     }
     return [arr[idx1], arr[idx2]];
@@ -883,48 +836,35 @@ export class JugadorContraIaPage implements OnInit {
       }
     }
     this.imprimirTablaConsole();
-
   }
-
-
-
-
-
 
   /*-------------------------------------------------------------------------------------------- 
                              CUANDO ENTRA LA PANTALLA
     ------------------------------------------------------------------------------------------*/
 
-  ionViewWillEnter() {
-
-  }
-
-
-
+  ionViewWillEnter() {}
 
   /*-------------------------------------------------------------------------
                           CRONOMETRO
    --------------------------------------------------------------------------*/
   paraSeguirCronometro(opc: boolean) {
     if (opc === true) {
-      this.stopTimerA()
+      this.stopTimerA();
       this.startTimerB();
     } else {
-      this.stopTimerB()
-      this.resumeTimerA()
+      this.stopTimerB();
+      this.resumeTimerA();
     }
   }
 
-
   startTimerA(): void {
-
-
-    this.timerSubscription = this.servicioDeTemporizador.obtenerCuentaAtrasTimer1().subscribe(tiempo => {
-      this.displayTimeA = this.formatTime(tiempo);  // Usar la función de formato aquí
-    });
+    this.timerSubscription = this.servicioDeTemporizador
+      .obtenerCuentaAtrasTimer1()
+      .subscribe((tiempo) => {
+        this.displayTimeA = this.formatTime(tiempo); // Usar la función de formato aquí
+      });
     this.servicioDeTemporizador.iniciarCuentaAtrasTimer1();
   }
-
 
   stopTimerA(): void {
     this.servicioDeTemporizador.detenerTimer1();
@@ -938,9 +878,11 @@ export class JugadorContraIaPage implements OnInit {
                   segundo timer 
   ----------------------------------------------------------*/
   startTimerB(): void {
-    this.timerSubscription = this.servicioDeTemporizador.obtenerCuentaAtrasTimer2().subscribe(tiempo => {
-      this.displayTimeB = this.formatTime(tiempo);  // Usar la función de formato aquí
-    });
+    this.timerSubscription = this.servicioDeTemporizador
+      .obtenerCuentaAtrasTimer2()
+      .subscribe((tiempo) => {
+        this.displayTimeB = this.formatTime(tiempo); // Usar la función de formato aquí
+      });
     this.servicioDeTemporizador.iniciarCuentaAtrasTimer2();
   }
 
@@ -952,40 +894,31 @@ export class JugadorContraIaPage implements OnInit {
     this.servicioDeTemporizador.reanudarCuentaAtrasTimer2();
   }
 
-
-
-
   imprimirTablaConsole() {
-
     console.clear();
-    console.log('x1b[32m LISTA DE TARJETAS', 'color: fuchsia; font-weight: bold;');
+    console.log(
+      'x1b[32m LISTA DE TARJETAS',
+      'color: fuchsia; font-weight: bold;'
+    );
     console.table(this.listaTarjetas); // Para una vista tabular
     console.log('\x1b[36m  BOTONES ABIERTOS FRON END');
     console.table(this.botonesAbierto); // Para una vista tabular
 
     // console.log('\x1b[33m%s\x1b[0m', " ----------BOTONES ABIERTOD DEL BACKEN   ");
     // console.table(this.botonesAbiertoBackend);
-
   }
 
-
-
-
   sonidosdelJuego(nombreAudio: string) {
-
     var soundid = new Howl({
       //src: ['assets/icons-audios/nivel' + this.nivel + '/audios/' + this.listaTarjetas[index].nombre + '.wav'],
       src: ['assets/sonidos/' + nombreAudio],
       // src: ['assets/icons-audios/nivel1/audios/HizoPareja.wav'],
       volume: 1.9,
-      onend: () => {
-      }
+      onend: () => {},
     });
 
-    soundid.play()
+    soundid.play();
   }
-
-
 
   /*
       ----------------------------------------------------------------------------------------
@@ -993,11 +926,22 @@ export class JugadorContraIaPage implements OnInit {
       -----------------------------------------------------------------------------------------
     */
 
-  finalizarJuego(jugador1: string, puntosA: number, jugador2: string, puntosB: number, ICo1: number, ICo2: number, socket1: string, socket2: string, sala: string
-    , urlAvatar1: string, urlAvatar2: string, resultadofinal: string, resultadofina2: string, pagina: string
-
+  finalizarJuego(
+    jugador1: string,
+    puntosA: number,
+    jugador2: string,
+    puntosB: number,
+    ICo1: number,
+    ICo2: number,
+    socket1: string,
+    socket2: string,
+    sala: string,
+    urlAvatar1: string,
+    urlAvatar2: string,
+    resultadofinal: string,
+    resultadofina2: string,
+    pagina: string
   ) {
-
     const resultado = {
       jugador1: {
         nombre: jugador1,
@@ -1018,21 +962,17 @@ export class JugadorContraIaPage implements OnInit {
         resultadofinal: resultadofina2,
       },
 
-      pagina: pagina
+      pagina: pagina,
     };
 
     // Guardar el resultado del juego
     this.guardarResultadosService.guardarResultados(resultado);
 
-
     // Navegar a la página de juego finalizado
     //  this.router.navigate(['/terminojuego']);
 
     this.navCtrl.navigateRoot('/juego-terminado');
-
-
   }
-
 
   imagenHizoPareja() {
     // Ocultar la imagen después de 2 segundos
@@ -1040,8 +980,5 @@ export class JugadorContraIaPage implements OnInit {
     setTimeout(() => {
       this.showImage = false;
     }, 1200);
-
   }
-
 }
-

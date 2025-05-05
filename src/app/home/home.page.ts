@@ -29,7 +29,12 @@ register();
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss', 'log-in.scss'],
+  styleUrls: [
+    'home.page.scss',
+    'home.page1.scss',
+    'home.page2.scss',
+    'home.page3.scss',
+  ],
 })
 export class HomePage implements OnInit {
   @ViewChild('inputNombre', { static: false, read: ElementRef }) inputNombre:

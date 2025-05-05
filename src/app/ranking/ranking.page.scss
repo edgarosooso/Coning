@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 @keyframes slideIn {
   from {
@@ -14,7 +14,11 @@
 }
 
 ion-content {
-  --background: radial-gradient(circle, rgba(42, 169, 211, 1) 0%, rgba(0, 96, 138, 1) 100%);
+  --background: radial-gradient(
+    circle,
+    rgba(42, 169, 211, 1) 0%,
+    rgba(0, 96, 138, 1) 100%
+  );
   height: 100vh;
 }
 
@@ -36,7 +40,11 @@ ion-list {
 }
 
 .fondo {
-  background: radial-gradient(circle, rgba(42, 169, 211, 1) 0%, rgba(0, 96, 138, 1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(42, 169, 211, 1) 0%,
+    rgba(0, 96, 138, 1) 100%
+  );
 }
 
 .card {
@@ -47,7 +55,7 @@ ion-list {
 }
 
 #listaContent {
-  height: 800
+  height: 800;
 }
 
 #Ranking {
@@ -74,7 +82,11 @@ ion-item {
   justify-content: space-between;
   align-items: center;
   border-radius: 25px;
-  --background: radial-gradient(circle, rgb(34, 154, 194) 0%, rgba(0, 96, 138, 1) 100%);
+  --background: radial-gradient(
+    circle,
+    rgb(34, 154, 194) 0%,
+    rgba(0, 96, 138, 1) 100%
+  );
   box-shadow: 0px 4px 3px gray;
   transition: all 0.5s;
   animation: slideIn 0.4s;
@@ -108,7 +120,7 @@ h2 {
   font-weight: 700;
   border-radius: 5px;
   color: #ffb300;
-  font-family: 'heavitas';
+  font-family: "heavitas";
 }
 
 @media (max-width: 575.98px) {
@@ -139,59 +151,11 @@ h2 {
 
 .stats p {
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: bold;
 }
 
 ion-card.highlight {
   border: 2px solid #3880ff;
   background-color: #1ba8ba !important;
-}
-
-.center-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-}
-
-#won {
-  color: rgb(0, 247, 255);
-}
-
-#lost {
-  color: rgb(166, 166, 166);
-}
-
-#tie {
-  color: rgb(166, 166, 166);
-}
-
-#btnRegresar {
-  clip-path: polygon(0 50%, 13% 0, 100% 0, 100% 100%, 100% 60%, 90% 100%, 0% 100%, 0 80%);
-  border: solid 2px #ed9227;
-  transition: all 0.2s ease-out;
-  background-color: #8c5912;
-  width: auto;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.568);
-  transition: 0.3s;
-  cursor: pointer;
-  filter: drop-shadow(10px 10px white);
-  font-family: heavitas;
-  letter-spacing: 1px;
-  color: #ffeeda;
-}
-
-#regresarCaja {
-  padding-top: 3%;
-  padding-bottom: 3%;
-  transition: all 0.3s;
-}
-
-#btnRegresar:hover {
-  transform: scale(1.07);
-  clip-path: polygon(0 0%, 13% 0, 100% 0, 100% 100%, 100% 60%, 100% 100%, 0% 100%, 0 80%);
-  background-color: #c0760f;
-  letter-spacing: 3px;
-  color: white;
 }
